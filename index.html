@@ -1,697 +1,951 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apotek Herbal AI - Solusi Kesehatan Alami Pasien</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
-                    },
-                    colors: {
-                        herbal: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            200: '#bbf7d0',
-                            300: '#86efac',
-                            400: '#4ade80',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                            950: '#052e16',
-                        },
-                        earth: {
-                            100: '#fef3c7',
-                            500: '#d97706',
-                            800: '#78350f',
-                            900: '#451a03',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
-        }
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.85; transform: scale(1.02); }
-        }
-        .animate-pulse-slow {
-            animation: pulse-slow 3s infinite ease-in-out;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RempahCheck — Konsultasi Herbal Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F3324;
+    --forest:#2C4A3B;
+    --forest-deep:#1B2F24;
+    --gold:#C68A2E;
+    --gold-soft:#E7B95F;
+    --clay:#A8452B;
+    --clay-soft:#C97A5C;
+    --parchment:#F1E9D8;
+    --parchment-deep:#E8DCC2;
+    --paper:#FBF7EE;
+    --line:#D8CBA9;
+    --danger:#9A2E1F;
+    --danger-bg:#F6E3DD;
+    --ok:#3C6B4D;
+    --shadow: 0 8px 24px rgba(31,51,36,0.10);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 12% -10%, rgba(198,138,46,0.14), transparent 45%),
+      radial-gradient(circle at 105% 15%, rgba(44,74,59,0.10), transparent 40%),
+      var(--parchment);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    padding:28px 16px 64px;
+  }
+  .wrap{max-width:760px; margin:0 auto;}
+
+  /* ---------- HEADER ---------- */
+  header.top{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:26px; gap:12px; flex-wrap:wrap;
+  }
+  .brandmark{display:flex; align-items:center; gap:10px;}
+  .brandmark .leaf{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--forest); display:flex; align-items:center; justify-content:center;
+    color:var(--gold-soft); font-size:18px; flex-shrink:0;
+    box-shadow: var(--shadow);
+  }
+  .brandmark .txt{line-height:1.15;}
+  .brandmark .txt b{font-family:'Fraunces', serif; font-size:19px; font-weight:600; color:var(--forest-deep); display:block;}
+  .brandmark .txt span{font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--clay);}
+  .badge-brand{
+    font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:.06em;
+    color:var(--forest); background:var(--paper); border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; text-transform:uppercase;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: var(--forest);
+    background-image: radial-gradient(circle at 85% 0%, rgba(198,138,46,0.25), transparent 55%);
+    border-radius: 20px; padding:30px 28px; color:var(--paper);
+    margin-bottom:22px; position:relative; overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-40px; bottom:-60px; width:220px; height:220px;
+    border:1px dashed rgba(231,185,95,0.35); border-radius:50%;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(24px,4vw,32px);
+    margin:0 0 8px; line-height:1.2; letter-spacing:-0.01em;
+  }
+  .hero p{margin:0; font-size:14.5px; line-height:1.6; color:#E7DFCB; max-width:480px;}
+
+  /* ---------- PROGRESS TRAIL ---------- */
+  .trail{display:flex; align-items:center; margin:26px 4px 22px; position:relative;}
+  .trail .seg{flex:1; height:2px; background:var(--line); position:relative; top:0;}
+  .trail .seg.done{background:var(--gold);}
+  .node{
+    width:30px; height:30px; border-radius:50%; background:var(--paper);
+    border:2px solid var(--line); flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--line);
+    transition: all .25s ease;
+  }
+  .node.active{border-color:var(--forest); color:var(--forest); background:var(--paper); box-shadow:0 0 0 4px rgba(44,74,59,0.10);}
+  .node.done{border-color:var(--gold); background:var(--gold); color:#fff;}
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius: var(--radius);
+    padding:28px; box-shadow: var(--shadow); position:relative;
+    animation: fadeIn .35s ease;
+  }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+  .step-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--clay); margin:0 0 6px;
+  }
+  .card h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:22px; margin:0 0 6px; color:var(--forest-deep);
+  }
+  .card .sub{font-size:13.5px; color:#5B6A5F; margin:0 0 22px; line-height:1.55;}
+
+  /* form elements */
+  .search-box{
+    width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid var(--line);
+    font-family:'Plus Jakarta Sans', sans-serif; font-size:14.5px; margin-bottom:14px; background:#fff;
+    outline:none; transition:border-color .15s;
+  }
+  .search-box:focus{border-color:var(--forest);}
+
+  .option-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+  @media(max-width:520px){.option-grid{grid-template-columns:1fr;}}
+  .opt{
+    border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:13px 14px;
+    cursor:pointer; font-size:14px; display:flex; align-items:center; gap:10px;
+    transition: all .15s ease; user-select:none; line-height:1.35;
+  }
+  .opt:hover{border-color:var(--gold-soft); background:#FFFCF6;}
+  .opt .dot{width:8px; height:8px; border-radius:50%; border:1.5px solid var(--line); flex-shrink:0;}
+  .opt.selected{border-color:var(--forest); background:#EDF2EC;}
+  .opt.selected .dot{background:var(--forest); border-color:var(--forest);}
+  .opt.checkbox.selected{border-color:var(--gold); background:#FBF1DE;}
+  .opt.checkbox.selected .dot{background:var(--gold); border-color:var(--gold); border-radius:3px;}
+  .opt.checkbox .dot{border-radius:3px;}
+
+  .symptom-list{max-height:320px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding-right:4px;}
+  .symptom-list::-webkit-scrollbar{width:6px;}
+  .symptom-list::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px;}
+  .symptom-item{
+    border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:12px 14px;
+    cursor:pointer; font-size:14px; transition:all .15s; display:flex; justify-content:space-between; align-items:center;
+  }
+  .symptom-item:hover{border-color:var(--gold-soft); background:#FFFCF6;}
+  .symptom-item.selected{border-color:var(--forest); background:#EDF2EC; font-weight:600;}
+  .symptom-item .cat{font-family:'IBM Plex Mono', monospace; font-size:9.5px; color:#93A196; text-transform:uppercase; letter-spacing:.06em;}
+  .empty-note{font-size:13px; color:#8C7F5E; padding:14px 4px; text-align:center;}
+
+  .cat-chips{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;}
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.03em;
+    padding:8px 14px; border-radius:999px; border:1.5px solid var(--line); background:#fff;
+    color:var(--forest-deep); cursor:pointer; transition:all .15s ease; user-select:none;
+    display:flex; align-items:center; gap:6px; white-space:nowrap;
+  }
+  .chip:hover{border-color:var(--gold-soft); background:#FFFCF6;}
+  .chip.active{background:var(--forest); border-color:var(--forest); color:#fff;}
+  .chip .n{
+    font-size:9.5px; background:rgba(255,255,255,0.25); border-radius:999px; padding:1px 6px;
+  }
+  .chip:not(.active) .n{background:var(--parchment-deep); color:#8C7F5E;}
+
+  label.field-label{display:block; font-size:13px; font-weight:600; color:var(--forest-deep); margin-bottom:7px;}
+  input[type=number]{
+    width:100%; padding:13px 16px; border-radius:10px; border:1.5px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:16px; background:#fff; outline:none;
+  }
+  input[type=number]:focus{border-color:var(--forest);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:520px){.field-row{grid-template-columns:1fr;}}
+  .field{margin-bottom:18px;}
+  .hint{font-size:12px; color:#8C7F5E; margin-top:6px;}
+
+  /* nav buttons */
+  .nav-row{display:flex; justify-content:space-between; align-items:center; margin-top:26px; gap:10px;}
+  button{font-family:'Plus Jakarta Sans', sans-serif; cursor:pointer; border:none;}
+  .btn-primary{
+    background:var(--forest); color:#fff; padding:13px 26px; border-radius:999px; font-weight:700; font-size:14.5px;
+    box-shadow: 0 4px 14px rgba(44,74,59,0.28); transition: transform .12s ease, background .15s;
+  }
+  .btn-primary:hover{background:var(--forest-deep); transform:translateY(-1px);}
+  .btn-primary:disabled{background:#C7CBC3; box-shadow:none; cursor:not-allowed; transform:none;}
+  .btn-ghost{
+    background:transparent; color:var(--forest); padding:13px 18px; font-weight:600; font-size:14px;
+    border:1.5px solid transparent;
+  }
+  .btn-ghost:hover{text-decoration:underline;}
+  .btn-ghost.invisible{visibility:hidden;}
+
+  /* ---------- RESULTS ---------- */
+  .alert{
+    border-radius:12px; padding:16px 18px; font-size:13.5px; line-height:1.6; margin-bottom:18px;
+    display:flex; gap:12px; align-items:flex-start;
+  }
+  .alert.danger{background:var(--danger-bg); border:1.5px solid #E3B7A9; color:var(--danger);}
+  .alert.info{background:#EAF1EC; border:1.5px solid #C6DACB; color:var(--forest-deep);}
+  .alert .ic{font-size:18px; flex-shrink:0; line-height:1;}
+  .alert b{display:block; margin-bottom:2px; font-size:13.5px;}
+
+  .result-head{margin-bottom:18px;}
+  .result-head .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.1em; color:var(--clay); text-transform:uppercase;}
+  .result-head h2{font-family:'Fraunces', serif; font-size:25px; font-weight:600; color:var(--forest-deep); margin:4px 0 4px;}
+  .result-head .meta{font-size:12.5px; color:#8C7F5E; font-family:'IBM Plex Mono', monospace;}
+
+  .rx-card{
+    border:1.5px dashed var(--gold); border-radius:14px; padding:20px 20px 18px; background:#FFFDF7;
+    margin-bottom:16px; position:relative;
+  }
+  .rx-card .stamp{
+    position:absolute; top:-13px; right:16px; background:var(--gold); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 12px; border-radius:999px; box-shadow:0 3px 8px rgba(198,138,46,0.35);
+  }
+  .rx-card h3{font-family:'Fraunces', serif; font-size:18.5px; font-weight:600; margin:0 0 10px; color:var(--forest-deep); padding-right:70px;}
+  .rx-row{display:flex; gap:10px; margin-bottom:8px; font-size:13.5px; line-height:1.55;}
+  .rx-row .k{font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--forest); flex-shrink:0; width:78px; padding-top:2px;}
+  .rx-row .v{flex:1; color:var(--ink);}
+  .rx-note{
+    margin-top:10px; padding-top:10px; border-top:1px dashed var(--line);
+    font-size:12.5px; color:var(--clay); line-height:1.5;
+  }
+
+  .section-title{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--forest); margin:26px 0 12px; display:flex; align-items:center; gap:8px;
+  }
+  .section-title::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  .pill-list{display:flex; flex-direction:column; gap:8px;}
+  .pill{
+    display:flex; gap:10px; align-items:flex-start; font-size:13.5px; line-height:1.55;
+    background:#fff; border:1px solid var(--line); border-radius:10px; padding:11px 14px;
+  }
+  .pill.avoid{border-left:3px solid var(--clay);}
+  .pill.tip{border-left:3px solid var(--ok);}
+  .pill .ic{flex-shrink:0; font-size:14px; margin-top:1px;}
+
+  .disclaimer{
+    margin-top:26px; font-size:11.5px; color:#8C7F5E; line-height:1.6; border-top:1px solid var(--line);
+    padding-top:16px;
+  }
+
+  .restart-row{display:flex; justify-content:center; margin-top:26px;}
+
+  footer.foot{
+    text-align:center; margin-top:34px; font-family:'IBM Plex Mono', monospace; font-size:10.5px;
+    color:#9C8F6D; letter-spacing:.05em;
+  }
+
+  .hidden{display:none !important;}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-herbal-200 selection:text-herbal-900">
+<body>
+<div class="wrap">
 
-    <!-- Header / Navbar -->
-    <header class="bg-gradient-to-r from-herbal-900 via-herbal-800 to-herbal-950 text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-herbal-500/20 border border-herbal-400/30 flex items-center justify-center text-herbal-300 text-xl shadow-inner">
-                    <i class="fa-solid fa-leaf"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-bold tracking-tight font-serif text-white">Nusantara Herbal Medicine</h1>
-                    <p class="text-xs text-herbal-300">Konsultasi AI Herbal & Pengobatan Alami Tradisional</p>
-                </div>
-            </div>
-            <div class="hidden sm:flex items-center space-x-4 text-xs font-medium">
-                <span class="bg-herbal-800/80 px-3 py-1.5 rounded-full border border-herbal-700/50 text-herbal-200 flex items-center gap-1.5">
-                    <i class="fa-solid fa-shield-halved text-herbal-400"></i> Teruji Resep Tradisional
-                </span>
-                <span class="bg-emerald-950/60 px-3 py-1.5 rounded-full border border-emerald-800 text-emerald-300 flex items-center gap-1.5">
-                    <i class="fa-solid fa-sparkles text-amber-400"></i> Powered by Gemini AI
-                </span>
-            </div>
-        </div>
-    </header>
+  <header class="top">
+    <div class="brandmark">
+      <div class="leaf">🌿</div>
+      <div class="txt"><b>RempahCheck</b><span>Created by Rizal Ariyanto</span></div>
+    </div>
+    <div class="badge-brand">Konsultasi Herbal Digital</div>
+  </header>
 
-    <!-- Main Container -->
-    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+  <div class="hero">
+    <h1>Ceritakan keluhanmu,<br>kami carikan racikan herbalnya.</h1>
+    <p>Jawab 5 pertanyaan singkat — keluhan, lama sakit, riwayat kesehatan, usia, dan berat badan — untuk mendapatkan rekomendasi herbal, cara konsumsi, dan pantangan yang sesuai.</p>
+  </div>
 
-        <!-- Left Side: Patient Consultation Form -->
-        <section class="lg:col-span-5 space-y-6">
-            <div class="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200/80 relative overflow-hidden">
-                <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-herbal-100 rounded-full blur-2xl pointer-events-none opacity-60"></div>
+  <div class="trail" id="trail"></div>
 
-                <div class="mb-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-herbal-50 text-herbal-700 text-xs font-semibold mb-2">
-                        <i class="fa-solid fa-clipboard-user"></i> Formulir Keluhan Pasien
-                    </div>
-                    <h2 class="text-2xl font-bold font-serif text-slate-900">Analisis Kesehatan Alami</h2>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Isi data keluhan di bawah ini untuk mendapatkan resep herbal racikan dan petunjuk pantangan yang akurat.</p>
-                </div>
+  <div class="card" id="cardArea"></div>
 
-                <!-- Fast Presets / Quick Chips -->
-                <div class="mb-5">
-                    <label class="block text-xs font-semibold text-slate-600 mb-2">Pilih Keluhan Populer (Klik Cepat):</label>
-                    <div class="flex flex-wrap gap-2" id="quickChips">
-                        <button type="button" onclick="applyPreset('Asam Lambung & Maag Kronis', '3 hari', 'Tidak ada', 34, 62)" class="text-xs bg-slate-100 hover:bg-herbal-100 hover:text-herbal-800 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition-all">
-                            🍃 Asam Lambung / Maag
-                        </button>
-                        <button type="button" onclick="applyPreset('Batuk berdahak & Tenggorokan gatal', '5 hari', 'Alergi dingin', 28, 55)" class="text-xs bg-slate-100 hover:bg-herbal-100 hover:text-herbal-800 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition-all">
-                            😷 Batuk & Flu
-                        </button>
-                        <button type="button" onclick="applyPreset('Pegal linu, Nyeri Sendi & Asam Urat', '1 minggu', 'Hipertensi ringan', 48, 70)" class="text-xs bg-slate-100 hover:bg-herbal-100 hover:text-herbal-800 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition-all">
-                            🦴 Pegal Linu / Asam Urat
-                        </button>
-                        <button type="button" onclick="applyPreset('Susah tidur (Insomnia) & cemas berlebihan', '2 minggu', 'Tidak ada', 25, 50)" class="text-xs bg-slate-100 hover:bg-herbal-100 hover:text-herbal-800 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 transition-all">
-                            🌙 Insomnia / Cemas
-                        </button>
-                    </div>
-                </div>
+  <footer class="foot">RempahCheck · Created by Rizal Ariyanto · Informasi edukasi, bukan pengganti diagnosis dokter</footer>
+</div>
 
-                <form id="consultationForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                    <!-- Keluhan Sakit -->
-                    <div>
-                        <label for="keluhan" class="block text-sm font-semibold text-slate-700 mb-1">
-                            Keluhan Sakit / Gejala Utamamu <span class="text-rose-500">*</span>
-                        </label>
-                        <textarea id="keluhan" rows="3" required placeholder="Contoh: Perut sering kembung, mual setelah makan, tenggorokan panas, kepala pusing..." class="w-full px-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-herbal-500 focus:border-herbal-500 outline-none transition-all"></textarea>
-                    </div>
+<script>
+/* =======================================================
+   DATA — 20 keluhan umum + basis pengetahuan herbal
+   ======================================================= */
+const SYMPTOMS = [
+  {id:"masuk_angin", label:"Masuk Angin", cat:"Umum",
+    remedies:[
+      {herb:"Wedang Jahe Hangat", dosis:"1 ruas jahe (±3 cm), digeprek", cara:"Rebus jahe geprek dengan 250 ml air selama 10 menit, saring, tambahkan sedikit madu. Minum selagi hangat, 2× sehari.", avoidIf:["maag"], note:"Jahe dosis tinggi dapat memicu perih lambung pada penderita maag/GERD."},
+      {herb:"Minyak Kayu Putih + Kerokan", dosis:"Secukupnya pada punggung/leher", cara:"Oleskan minyak kayu putih pada area punggung, leher, dan perut, pijat lembut. Kerokan tradisional boleh dilakukan bila terbiasa.", avoidIf:[], note:"Hindari area kulit yang luka atau iritasi."}
+    ],
+    pantangan:["Hindari makanan dingin dan minuman bersoda selama gejala berlangsung","Hindari begadang dan kelelahan fisik berlebihan","Kurangi paparan langsung kipas angin/AC dingin"],
+    tips:["Perbanyak istirahat dan tidur cukup","Kompres hangat di perut bisa membantu meredakan kembung"]},
 
-                    <!-- Durasi Sakit -->
-                    <div>
-                        <label for="durasi" class="block text-sm font-semibold text-slate-700 mb-1">
-                            Berapa Lama Sudah Dirasakan? <span class="text-rose-500">*</span>
-                        </label>
-                        <div class="relative">
-                            <i class="fa-regular fa-clock absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                            <input type="text" id="durasi" required placeholder="Contoh: 3 hari, 2 minggu, 1 bulan" class="w-full pl-9 pr-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-herbal-500 focus:border-herbal-500 outline-none transition-all">
-                        </div>
-                    </div>
+  {id:"sakit_kepala", label:"Sakit Kepala / Pusing", cat:"Umum",
+    remedies:[
+      {herb:"Teh Peppermint / Daun Mint", dosis:"5-6 lembar daun mint segar", cara:"Seduh daun mint dengan 200 ml air panas selama 5 menit, minum hangat-hangat.", avoidIf:[], note:"Aroma mint juga bisa dihirup langsung untuk efek relaksasi."},
+      {herb:"Kompres Jahe Hangat", dosis:"1 ruas jahe, diparut", cara:"Parut jahe, bungkus kain bersih, kompreskan pada dahi atau tengkuk selama 10-15 menit.", avoidIf:[], note:"Hentikan bila kulit terasa terlalu panas atau iritasi."}
+    ],
+    pantangan:["Hindari paparan layar gadget berlebihan saat pusing","Hindari ruangan pengap dan minim cahaya","Batasi konsumsi kafein berlebihan"],
+    tips:["Pastikan cukup cairan tubuh (dehidrasi sering memicu sakit kepala)","Istirahatkan mata dan pikiran sejenak di ruangan tenang"]},
 
-                    <!-- Riwayat Sakit / Alergi -->
-                    <div>
-                        <label for="riwayat" class="block text-sm font-semibold text-slate-700 mb-1">
-                            Riwayat Penyakit lain / Alergi Obat & Makanan
-                        </label>
-                        <div class="relative">
-                            <i class="fa-solid fa-notes-medical absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                            <input type="text" id="riwayat" placeholder="Contoh: Hipertensi, Alergi Kacang, Diabetes (Ketik 'Tidak ada' jika nihil)" class="w-full pl-9 pr-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-herbal-500 focus:border-herbal-500 outline-none transition-all">
-                        </div>
-                    </div>
+  {id:"batuk_kering", label:"Batuk Kering", cat:"Pernapasan",
+    remedies:[
+      {herb:"Madu + Jeruk Nipis", dosis:"2 sdm madu, 1 sdt air jeruk nipis", cara:"Campurkan madu dan air perasan jeruk nipis dalam air hangat, minum 2-3× sehari.", avoidIf:[], note:"Tidak dianjurkan untuk anak di bawah 1 tahun karena risiko botulisme pada madu mentah."},
+      {herb:"Wedang Kencur", dosis:"1 ruas kencur segar", cara:"Parut kencur, peras airnya, campur air hangat dan sedikit madu, minum 2× sehari.", avoidIf:[], note:"Rasa kencur cukup tajam, sesuaikan takaran sesuai toleransi."}
+    ],
+    pantangan:["Hindari makanan/minuman dingin dan berminyak","Hindari asap rokok dan udara berdebu","Kurangi bicara berlebihan yang memperberat iritasi tenggorokan"],
+    tips:["Gunakan pelembap udara (humidifier) bila udara terlalu kering","Perbanyak minum air putih hangat"]},
 
-                    <!-- Umur & Berat Badan Grid -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label for="umur" class="block text-sm font-semibold text-slate-700 mb-1">
-                                Umur (Tahun) <span class="text-rose-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <i class="fa-solid fa-cake-candles absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                                <input type="number" id="umur" min="1" max="120" required placeholder="30" class="w-full pl-9 pr-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-herbal-500 focus:border-herbal-500 outline-none transition-all">
-                            </div>
-                        </div>
+  {id:"batuk_berdahak", label:"Batuk Berdahak", cat:"Pernapasan",
+    remedies:[
+      {herb:"Rebusan Daun Sirih + Jahe", dosis:"3 lembar daun sirih, 1 ruas jahe", cara:"Rebus daun sirih dan jahe geprek dalam 300 ml air hingga tersisa 150 ml, saring, minum hangat 2× sehari.", avoidIf:["maag"], note:"Kombinasi ini cukup 'panas', kurangi bila lambung sensitif."},
+      {herb:"Wedang Jahe + Serai", dosis:"1 ruas jahe, 1 batang serai", cara:"Geprek jahe dan serai, rebus dengan 300 ml air selama 10 menit, saring, minum hangat.", avoidIf:[], note:"Bisa ditambah madu untuk rasa lebih nyaman."}
+    ],
+    pantangan:["Hindari makanan bersantan dan gorengan","Hindari minuman dingin dan es","Jangan menahan dahak, keluarkan dengan cara yang wajar"],
+    tips:["Posisi tidur agak tegak membantu mengurangi penumpukan dahak","Uap hangat (steam) dapat membantu mengencerkan dahak"]},
 
-                        <div>
-                            <label for="berat" class="block text-sm font-semibold text-slate-700 mb-1">
-                                Berat Badan (kg) <span class="text-rose-500">*</span>
-                            </label>
-                            <div class="relative">
-                                <i class="fa-solid fa-weight-scale absolute left-3.5 top-3 text-slate-400 text-sm"></i>
-                                <input type="number" id="berat" min="5" max="300" required placeholder="60" class="w-full pl-9 pr-3.5 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl focus:ring-2 focus:ring-herbal-500 focus:border-herbal-500 outline-none transition-all">
-                            </div>
-                        </div>
-                    </div>
+  {id:"pilek_flu", label:"Pilek / Flu", cat:"Pernapasan",
+    remedies:[
+      {herb:"Wedang Jahe Merah + Madu", dosis:"1 ruas jahe merah", cara:"Rebus jahe merah geprek dengan 250 ml air 10 menit, saring, tambahkan madu, minum hangat 2-3× sehari.", avoidIf:["maag"], note:"Jahe merah lebih 'panas' dari jahe biasa, kurangi bila lambung sensitif."},
+      {herb:"Uap Minyak Kayu Putih", dosis:"3-5 tetes dalam air panas", cara:"Teteskan minyak kayu putih ke dalam mangkuk air panas, hirup uapnya perlahan selama beberapa menit.", avoidIf:[], note:"Jaga jarak aman dari air panas untuk menghindari luka bakar."}
+    ],
+    pantangan:["Hindari kontak dekat berlebihan untuk mencegah penularan","Hindari kelelahan fisik dan begadang","Kurangi makanan dingin dan berminyak"],
+    tips:["Istirahat total minimal 1-2 hari mempercepat pemulihan","Perbanyak asupan vitamin C alami seperti jeruk"]},
 
-                    <!-- Submit Button -->
-                    <div class="pt-2">
-                        <button type="submit" id="submitBtn" class="w-full py-3.5 px-4 bg-gradient-to-r from-herbal-700 via-herbal-600 to-herbal-800 hover:from-herbal-800 hover:to-herbal-900 text-white font-semibold rounded-xl shadow-lg shadow-herbal-700/20 hover:shadow-herbal-800/30 flex items-center justify-center gap-2 transition-all transform active:scale-[0.99]">
-                            <i class="fa-solid fa-prescription-bottle-medical"></i>
-                            <span>Dapatkan Rekomendasi Herbal AI</span>
-                        </button>
-                    </div>
-                </form>
-            </div>
+  {id:"sakit_tenggorokan", label:"Sakit Tenggorokan", cat:"Pernapasan",
+    remedies:[
+      {herb:"Kumur Air Garam Hangat", dosis:"1/2 sdt garam dalam 200 ml air hangat", cara:"Larutkan garam, kumur (bukan diminum) selama 30 detik, ulangi 3× sehari.", avoidIf:[], note:"Jangan ditelan, khusus untuk berkumur."},
+      {herb:"Madu + Kunyit Hangat", dosis:"1 sdm madu, 1/2 sdt bubuk kunyit", cara:"Campur dalam segelas air hangat, aduk rata, minum perlahan 2× sehari.", avoidIf:["ginjal"], note:"Konsumsi kunyit berlebihan perlu diperhatikan pada gangguan ginjal/empedu."}
+    ],
+    pantangan:["Hindari makanan pedas dan gorengan","Hindari minuman dingin dan bersoda","Kurangi berbicara keras atau berteriak"],
+    tips:["Permen pelega tenggorokan alami bisa membantu sementara","Jaga kelembapan udara ruangan"]},
 
-            <!-- Informational Banner -->
-            <div class="bg-amber-50 border border-amber-200/70 rounded-2xl p-4 flex gap-3">
-                <i class="fa-solid fa-circle-exclamation text-amber-600 text-lg flex-shrink-0 mt-0.5"></i>
-                <div class="text-xs text-amber-900 leading-relaxed">
-                    <strong>Penting:</strong> Rekomendasi obat herbal bersifat suportif & pertolongan pertama berbasis tradisi herbalism. Jika dirasakan gejala berat seperti nyeri dada hebat, pendarahan, atau sesak napas parah, segera kunjungi fasilitas kesehatan terdekat.
-                </div>
-            </div>
-        </section>
+  {id:"demam", label:"Demam Ringan", cat:"Umum",
+    remedies:[
+      {herb:"Rebusan Daun Sambiloto/Meniran", dosis:"5-7 lembar daun kering", cara:"Rebus dengan 300 ml air hingga tersisa 150 ml, saring, minum hangat 1-2× sehari.", avoidIf:["hamil","menyusui"], note:"Sambiloto rasanya sangat pahit; hindari penggunaan rutin jangka panjang tanpa pengawasan."},
+      {herb:"Kompres Air Hangat", dosis:"Air hangat suam-suam kuku", cara:"Kompres dahi, ketiak, dan lipat paha dengan kain yang dibasahi air hangat (bukan dingin/es).", avoidIf:[], note:"Ganti kompres setiap beberapa menit."}
+    ],
+    pantangan:["Hindari menyelimuti tubuh terlalu tebal saat demam","Hindari mandi air dingin mendadak","Jangan memaksakan aktivitas fisik berat"],
+    tips:["Perbanyak cairan untuk mencegah dehidrasi","Pantau suhu tubuh secara berkala"]},
 
-        <!-- Right Side: Diagnosis Results & Recommendations -->
-        <section class="lg:col-span-7">
-            <!-- Initial State (Empty) -->
-            <div id="emptyState" class="bg-white rounded-2xl p-8 sm:p-12 text-center border border-dashed border-slate-300 flex flex-col items-center justify-center min-h-[480px]">
-                <div class="w-20 h-20 rounded-full bg-herbal-50 text-herbal-600 flex items-center justify-center text-3xl mb-4 shadow-sm border border-herbal-100">
-                    <i class="fa-solid fa-mortaring-pestle"></i>
-                </div>
-                <h3 class="text-xl font-bold font-serif text-slate-800 mb-2">Belum Ada Analisis Resep</h3>
-                <p class="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
-                    Silakan isi data keluhan fisik, durasi sakit, dan profil kesehatan Anda di formulir sebelah kiri untuk menampilkan resep racikan herbal alami, gambar tanaman, dosis, dan daftar pantangan.
-                </p>
-                <div class="mt-6 flex flex-wrap justify-center gap-4 text-xs text-slate-400">
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-herbal-500"></i> Resep Bebas Kimia</span>
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-herbal-500"></i> Dosis Disesuaikan Berat Badan</span>
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-check text-herbal-500"></i> Tips Pantangan Lengkap</span>
-                </div>
-            </div>
+  {id:"maag", label:"Maag / Asam Lambung", cat:"Pencernaan",
+    remedies:[
+      {herb:"Kunyit Asam Hangat (encer)", dosis:"1/2 ruas kunyit, sedikit asam jawa", cara:"Rebus kunyit dengan air, saring, minum hangat dalam keadaan encer setelah makan, hindari saat perut kosong.", avoidIf:["ginjal"], note:"Hindari versi yang terlalu asam/pekat karena dapat memperberat iritasi lambung."},
+      {herb:"Air Rebusan Daun Kemangi", dosis:"segenggam daun kemangi segar", cara:"Rebus daun kemangi dengan 300 ml air selama 5-7 menit, saring, minum hangat setelah makan.", avoidIf:["hamil"], note:"Konsumsi dalam jumlah wajar sebagai teh, bukan pengganti obat maag yang diresepkan dokter."}
+    ],
+    pantangan:["Hindari makanan pedas, asam berlebihan, dan berlemak tinggi","Hindari kopi, soda, dan alkohol","Jangan makan terlalu kenyang atau menunda waktu makan","Hindari berbaring langsung setelah makan"],
+    tips:["Makan dengan porsi kecil namun lebih sering","Kelola stres karena berkaitan erat dengan produksi asam lambung"]},
 
-            <!-- Loading State -->
-            <div id="loadingState" class="hidden bg-white rounded-2xl p-8 sm:p-12 text-center border border-slate-200/80 shadow-sm flex flex-col items-center justify-center min-h-[480px]">
-                <div class="relative mb-6">
-                    <div class="w-20 h-20 rounded-full border-4 border-herbal-100 border-t-herbal-600 animate-spin flex items-center justify-center"></div>
-                    <div class="absolute inset-0 flex items-center justify-center text-herbal-700 text-xl animate-pulse">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold font-serif text-slate-800 mb-2">Meracik Resep Herbal AI...</h3>
-                <p class="text-sm text-slate-500 max-w-sm mx-auto leading-relaxed" id="loadingSubtext">
-                    Menganalisis kecocokan senyawa tanaman herbal tradisional berdasarkan keluhan & kondisi tubuh Anda...
-                </p>
-                <div class="mt-6 w-48 bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div class="bg-gradient-to-r from-herbal-500 to-herbal-700 h-full w-2/3 animate-pulse"></div>
-                </div>
-            </div>
+  {id:"kembung", label:"Perut Kembung", cat:"Pencernaan",
+    remedies:[
+      {herb:"Wedang Jahe", dosis:"1 ruas jahe geprek", cara:"Rebus jahe dengan 250 ml air 10 menit, saring, minum hangat setelah makan.", avoidIf:["maag"], note:"Efektif membantu mengeluarkan gas dalam perut."},
+      {herb:"Air Rebusan Daun Mint", dosis:"5-6 lembar daun mint", cara:"Seduh dengan air panas 5 menit, minum hangat.", avoidIf:[], note:"Dapat membantu meredakan kram ringan akibat gas berlebih."}
+    ],
+    pantangan:["Hindari minuman bersoda dan berkarbonasi","Kurangi makanan penghasil gas berlebih seperti kubis mentah dan kacang-kacangan dalam jumlah besar","Hindari makan terlalu cepat/terburu-buru"],
+    tips:["Jalan santai ringan setelah makan dapat membantu","Kunyah makanan lebih perlahan dan lebih lama"]},
 
-            <!-- Results Container -->
-            <div id="resultsContainer" class="hidden space-y-6">
-                <!-- Patient Header Card -->
-                <div class="bg-gradient-to-br from-herbal-900 to-slate-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
-                    <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-herbal-500/10 rounded-full blur-3xl"></div>
-                    
-                    <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/10">
-                        <div>
-                            <span class="text-xs uppercase tracking-wider text-herbal-300 font-semibold">Hasil Diagnosa & Resep</span>
-                            <h3 class="text-xl font-bold font-serif text-white mt-0.5" id="resDiagnosisTitle">Analisis Keluhan Sakit</h3>
-                        </div>
-                        <button onclick="printPrescription()" class="px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-medium text-white transition-all flex items-center gap-1.5 backdrop-blur-sm">
-                            <i class="fa-solid fa-print"></i> Cetak Resep
-                        </button>
-                    </div>
+  {id:"mual", label:"Mual", cat:"Pencernaan",
+    remedies:[
+      {herb:"Wedang Jahe Hangat", dosis:"1 ruas kecil jahe geprek", cara:"Rebus jahe dengan 200 ml air, saring, minum hangat sedikit demi sedikit.", avoidIf:["maag"], note:"Jahe dikenal luas membantu meredakan mual, termasuk mual perjalanan."},
+      {herb:"Aroma Terapi Peppermint", dosis:"beberapa tetes minyak esensial", cara:"Hirup aroma minyak peppermint secara perlahan, atau seduh teh mint hangat.", avoidIf:[], note:"Hindari kontak langsung minyak esensial pekat dengan kulit tanpa pengencer."}
+    ],
+    pantangan:["Hindari makanan berminyak dan beraroma menyengat saat mual","Hindari berbaring segera setelah makan","Jangan memaksakan makan dalam porsi besar"],
+    tips:["Makan dalam porsi kecil tapi sering","Cari udara segar dan hindari ruangan pengap"]},
 
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 text-xs">
-                        <div class="bg-white/5 p-2.5 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block text-[10px]">LAMA SAKIT</span>
-                            <span class="font-semibold text-herbal-200" id="resDurasi">-</span>
-                        </div>
-                        <div class="bg-white/5 p-2.5 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block text-[10px]">UMUR / BB</span>
-                            <span class="font-semibold text-herbal-200" id="resUmurBB">-</span>
-                        </div>
-                        <div class="bg-white/5 p-2.5 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block text-[10px]">RIWAYAT/ALERGI</span>
-                            <span class="font-semibold text-herbal-200 truncate block" id="resRiwayat">-</span>
-                        </div>
-                        <div class="bg-white/5 p-2.5 rounded-xl border border-white/10">
-                            <span class="text-slate-400 block text-[10px]">TINGKAT REKOMENDASI</span>
-                            <span class="font-semibold text-emerald-400" id="resStatus">Ringan - Alami</span>
-                        </div>
-                    </div>
+  {id:"diare", label:"Diare", cat:"Pencernaan",
+    remedies:[
+      {herb:"Air Rebusan Daun Jambu Biji", dosis:"7-10 lembar daun jambu biji muda", cara:"Rebus dengan 400 ml air hingga tersisa 200 ml, saring, minum hangat 2× sehari.", avoidIf:[], note:"Hentikan bila diare disertai darah, lendir, atau demam tinggi — segera ke fasilitas kesehatan."},
+      {herb:"Larutan Oralit / Air Kelapa", dosis:"sesuai kebutuhan cairan tubuh", cara:"Minum larutan oralit atau air kelapa murni sedikit demi sedikit untuk mengganti cairan yang hilang.", avoidIf:[], note:"Rehidrasi adalah prioritas utama saat diare."}
+    ],
+    pantangan:["Hindari makanan pedas, berlemak, dan produk susu sementara waktu","Hindari makanan mentah atau kurang matang","Jangan menahan buang air besar"],
+    tips:["Jaga kebersihan tangan dan makanan untuk mencegah perburukan","Segera ke dokter bila diare berlangsung lebih dari 2 hari atau disertai tanda dehidrasi berat"]},
 
-                    <!-- Brief Diagnosis Overview -->
-                    <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed" id="resOverviewText">
-                        -
-                    </p>
-                </div>
+  {id:"sembelit", label:"Sembelit / Susah BAB", cat:"Pencernaan",
+    remedies:[
+      {herb:"Air Rebusan Daun Senna (ringan)", dosis:"secukupnya, sesuai anjuran kemasan", cara:"Gunakan dalam takaran ringan dan tidak rutin jangka panjang; ikuti petunjuk pada produk herbal terpercaya.", avoidIf:["hamil","menyusui","ginjal"], note:"Penggunaan jangka panjang dapat menyebabkan ketergantungan usus; tidak untuk pemakaian rutin."},
+      {herb:"Air Hangat + Perasan Lemon", dosis:"1/2 buah lemon", cara:"Peras lemon ke dalam segelas air hangat, minum di pagi hari sebelum makan.", avoidIf:["maag"], note:"Cara sederhana untuk merangsang gerakan usus secara alami."}
+    ],
+    pantangan:["Hindari makanan rendah serat dan olahan berlebihan","Hindari menahan keinginan buang air besar","Kurangi duduk terlalu lama tanpa bergerak"],
+    tips:["Perbanyak asupan serat dari sayur dan buah","Cukupi kebutuhan cairan harian dan tetap aktif bergerak"]},
 
-                <!-- Section: Recommended Herbs List -->
-                <div class="space-y-4">
-                    <h4 class="text-lg font-bold font-serif text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-seedling text-herbal-600"></i> Rekomendasi Tumbuhan Herbal & Cara Pengolahan
-                    </h4>
-                    
-                    <div id="herbsList" class="space-y-4">
-                        <!-- Dynamic Herb Cards will be injected here -->
-                    </div>
-                </div>
+  {id:"sakit_sendi", label:"Nyeri Sendi / Rematik", cat:"Otot & Sendi",
+    remedies:[
+      {herb:"Kompres Jahe Hangat", dosis:"2 ruas jahe, diparut", cara:"Parut jahe, campur sedikit air hangat, balurkan pada sendi yang nyeri, biarkan 15-20 menit.", avoidIf:[], note:"Hentikan bila kulit iritasi atau terasa panas berlebih."},
+      {herb:"Rebusan Kunyit + Jahe", dosis:"1/2 ruas kunyit, 1 ruas jahe", cara:"Rebus keduanya dengan 300 ml air, saring, minum hangat 1-2× sehari.", avoidIf:["ginjal"], note:"Dikenal membantu meredakan peradangan ringan secara alami."}
+    ],
+    pantangan:["Hindari makanan tinggi purin bila nyeri terkait asam urat (jeroan, seafood tertentu)","Hindari aktivitas yang membebani sendi secara berlebihan","Kurangi paparan dingin langsung pada sendi yang bermasalah"],
+    tips:["Peregangan ringan dan rutin membantu menjaga fleksibilitas sendi","Jaga berat badan ideal untuk mengurangi beban pada sendi"]},
 
-                <!-- Section: Pantangan & Things to Avoid -->
-                <div class="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm space-y-4">
-                    <h4 class="text-lg font-bold font-serif text-rose-900 flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center text-xs">
-                            <i class="fa-solid fa-ban"></i>
-                        </div>
-                        Pantangan & Hal Yang Harus Dihindari
-                    </h4>
-                    <p class="text-xs text-slate-500">Guna mempercepat proses pemulihan alami, hindari makanan/aktivitas berikut selama masa keluhan:</p>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="pantanganList">
-                        <!-- Dynamic Pantangan injected here -->
-                    </div>
-                </div>
+  {id:"asam_urat", label:"Asam Urat", cat:"Metabolik",
+    remedies:[
+      {herb:"Air Rebusan Daun Salam", dosis:"7-10 lembar daun salam", cara:"Rebus dengan 400 ml air hingga tersisa 200 ml, saring, minum hangat 1-2× sehari.", avoidIf:[], note:"Konsumsi rutin sebaiknya dipantau bila memiliki riwayat tekanan darah rendah."},
+      {herb:"Air Rebusan Sirsak", dosis:"2-3 lembar daun sirsak", cara:"Rebus daun sirsak dengan 300 ml air hingga tersisa 150 ml, saring, minum hangat 1× sehari.", avoidIf:["hamil"], note:"Hindari konsumsi berlebihan dan jangka sangat panjang tanpa jeda."}
+    ],
+    pantangan:["Hindari jeroan, seafood tinggi purin (kerang, cumi), dan daging merah berlebihan","Hindari minuman beralkohol dan minuman manis tinggi fruktosa","Kurangi konsumsi kacang-kacangan dan emping berlebihan"],
+    tips:["Perbanyak minum air putih untuk membantu pembuangan asam urat","Jaga berat badan ideal dan aktif bergerak secara teratur"]},
 
-                <!-- Section: Tips Gaya Hidup Sehat -->
-                <div class="bg-gradient-to-br from-emerald-50 to-herbal-50 rounded-2xl p-6 border border-herbal-200/60 shadow-sm space-y-4">
-                    <h4 class="text-lg font-bold font-serif text-herbal-900 flex items-center gap-2">
-                        <div class="w-7 h-7 rounded-lg bg-herbal-200/80 text-herbal-800 flex items-center justify-center text-xs">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                        </div>
-                        Tips & Anjuran Pola Hidup Pemulihan
-                    </h4>
-                    
-                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-700" id="tipsList">
-                        <!-- Dynamic Tips injected here -->
-                    </ul>
-                </div>
+  {id:"darah_tinggi", label:"Tekanan Darah Tinggi (ringan)", cat:"Metabolik",
+    remedies:[
+      {herb:"Air Rebusan Daun Seledri", dosis:"segenggam daun seledri segar", cara:"Rebus dengan 300 ml air hingga tersisa 150 ml, saring, minum hangat 1× sehari.", avoidIf:["ginjal"], note:"Bukan pengganti obat antihipertensi yang sudah diresepkan dokter — gunakan sebagai pendamping gaya hidup sehat."},
+      {herb:"Air Rebusan Bawang Putih", dosis:"2 siung bawang putih, digeprek", cara:"Rebus dengan 200 ml air selama 10 menit, saring, minum hangat.", avoidIf:["maag"], note:"Hati-hati bila sedang mengonsumsi obat pengencer darah, dapat memperkuat efeknya."}
+    ],
+    pantangan:["Hindari makanan tinggi garam dan makanan olahan/kalengan","Hindari stres berlebihan dan kurang tidur","Batasi konsumsi kafein dan hindari rokok"],
+    tips:["Pantau tekanan darah secara rutin di rumah","Jangan menghentikan obat resep dokter tanpa konsultasi, herbal ini sifatnya pendamping"]},
 
-                <!-- Footer Disclaimer -->
-                <div class="text-center text-xs text-slate-400 pt-2 pb-4">
-                    <p>* Resep herbal ini disusun berbasis kecerdasan buatan & studi pengobatan tradisional herbalisme Nusantara.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+  {id:"kolesterol", label:"Kolesterol Tinggi", cat:"Metabolik",
+    remedies:[
+      {herb:"Air Rebusan Daun Salam", dosis:"7-10 lembar daun salam", cara:"Rebus dengan 400 ml air hingga tersisa 200 ml, saring, minum hangat 1× sehari.", avoidIf:[], note:"Konsumsi teratur sebagai pendamping pola makan sehat, bukan pengganti obat."},
+      {herb:"Teh Jahe + Kunyit", dosis:"1 ruas jahe, 1/2 ruas kunyit", cara:"Rebus keduanya dengan 300 ml air, saring, minum hangat 1× sehari.", avoidIf:["ginjal"], note:"Dapat membantu metabolisme lemak namun efeknya bertahap."}
+    ],
+    pantangan:["Hindari gorengan dan makanan tinggi lemak jenuh/trans","Hindari jeroan dan makanan cepat saji berlebihan","Kurangi konsumsi santan kental setiap hari"],
+    tips:["Perbanyak konsumsi serat dari sayur, buah, dan oat","Rutin berolahraga ringan minimal 3-4× seminggu"]},
 
-    <script>
-        // Preset applicator
-        function applyPreset(keluhan, durasi, riwayat, umur, berat) {
-            document.getElementById('keluhan').value = keluhan;
-            document.getElementById('durasi').value = durasi;
-            document.getElementById('riwayat').value = riwayat;
-            document.getElementById('umur').value = umur;
-            document.getElementById('berat').value = berat;
-            
-            // Highlight chip feedback
-            const btn = event.currentTarget;
-            btn.classList.add('ring-2', 'ring-herbal-500', 'bg-herbal-100');
-            setTimeout(() => {
-                btn.classList.remove('ring-2', 'ring-herbal-500', 'bg-herbal-100');
-            }, 600);
-        }
+  {id:"susah_tidur", label:"Insomnia / Susah Tidur", cat:"Umum",
+    remedies:[
+      {herb:"Teh Chamomile Hangat", dosis:"1 sachet/1 sdt bunga chamomile kering", cara:"Seduh dengan 200 ml air panas selama 5 menit, minum hangat 30-60 menit sebelum tidur.", avoidIf:[], note:"Dikenal luas membantu relaksasi menjelang tidur."},
+      {herb:"Susu Hangat + Sedikit Madu", dosis:"200 ml susu hangat, 1 sdt madu", cara:"Campurkan madu ke dalam susu hangat (bukan panas), minum menjelang tidur.", avoidIf:["diabetes"], note:"Perhatikan kandungan gula tambahan bagi penderita diabetes."}
+    ],
+    pantangan:["Hindari kafein dan layar gadget menjelang tidur","Hindari makan berat larut malam","Hindari tidur siang berlebihan di sore hari"],
+    tips:["Buat rutinitas tidur yang konsisten setiap malam","Ciptakan suasana kamar yang tenang, gelap, dan sejuk"]},
 
-        // Exponential Backoff Fetch Helper
-        async function fetchWithRetry(url, options, retries = 3, backoff = 1000) {
-            try {
-                const res = await fetch(url, options);
-                if (!res.ok) {
-                    if (res.status === 429 && retries > 0) {
-                        await new Promise(r => setTimeout(r, backoff));
-                        return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                    }
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                return res;
-            } catch (err) {
-                if (retries > 0) {
-                    await new Promise(r => setTimeout(r, backoff));
-                    return fetchWithRetry(url, options, retries - 1, backoff * 2);
-                }
-                throw err;
-            }
-        }
+  {id:"stamina", label:"Lemas / Stamina Menurun", cat:"Umum",
+    remedies:[
+      {herb:"Jamu Beras Kencur", dosis:"1 ruas kencur, sedikit beras rendam", cara:"Blender kencur dengan beras rendam dan air, saring, minum segar 1× sehari.", avoidIf:["maag"], note:"Jamu tradisional yang dikenal membantu memulihkan stamina."},
+      {herb:"Air Rebusan Temulawak", dosis:"1 ruas temulawak", cara:"Rebus temulawak geprek dengan 300 ml air selama 15 menit, saring, minum hangat 1× sehari.", avoidIf:["ginjal"], note:"Umum digunakan untuk membantu menjaga nafsu makan dan stamina."}
+    ],
+    pantangan:["Hindari begadang dan pola tidur tidak teratur","Hindari melewatkan waktu makan","Kurangi konsumsi kafein berlebihan sebagai pengganti istirahat"],
+    tips:["Pastikan asupan gizi seimbang, terutama zat besi dan protein","Cek kondisi kesehatan bila lemas berlangsung lama tanpa sebab jelas"]},
 
-        // Handle Main Consultation Form Submission
-        async function handleFormSubmit(e) {
-            e.preventDefault();
+  {id:"jerawat", label:"Jerawat", cat:"Kulit",
+    remedies:[
+      {herb:"Masker Kunyit + Madu", dosis:"1/2 sdt bubuk kunyit, 1 sdt madu", cara:"Campur menjadi pasta, oleskan tipis pada area berjerawat, diamkan 15 menit, bilas dengan air hangat.", avoidIf:[], note:"Uji coba di area kecil kulit terlebih dahulu untuk memastikan tidak alergi."},
+      {herb:"Air Rebusan Daun Sirih untuk Cuci Muka", dosis:"5-7 lembar daun sirih", cara:"Rebus daun sirih, gunakan air rebusan yang sudah dingin untuk membilas wajah setelah cuci muka.", avoidIf:[], note:"Gunakan air bersih dan pastikan kulit wajah tidak dalam kondisi luka terbuka."}
+    ],
+    pantangan:["Hindari memencet jerawat secara paksa","Hindari makanan tinggi gula dan olahan berlebihan bila jerawat mudah kambuh","Bersihkan wajah secara rutin, hindari produk yang menyumbat pori"],
+    tips:["Ganti sarung bantal secara rutin","Jaga kebersihan tangan sebelum menyentuh wajah"]},
 
-            const keluhan = document.getElementById('keluhan').value.trim();
-            const durasi = document.getElementById('durasi').value.trim();
-            const riwayat = document.getElementById('riwayat').value.trim() || "Tidak Ada";
-            const umur = document.getElementById('umur').value;
-            const berat = document.getElementById('berat').value;
+  {id:"migrain", label:"Migrain", cat:"Umum",
+    remedies:[
+      {herb:"Teh Jahe Hangat", dosis:"1 ruas jahe geprek", cara:"Rebus jahe dengan 250 ml air 10 menit, saring, minum hangat saat gejala mulai terasa.", avoidIf:["maag"], note:"Beberapa studi menunjukkan jahe dapat membantu meredakan gejala migrain ringan."},
+      {herb:"Kompres Dingin di Dahi", dosis:"kain bersih + air dingin", cara:"Kompres dahi dan pelipis dengan kain dingin selama 15 menit di ruangan gelap dan tenang.", avoidIf:[], note:"Berbeda dengan sakit kepala biasa, migrain sering membaik dengan kompres dingin, bukan hangat."}
+    ],
+    pantangan:["Hindari pemicu umum seperti cahaya terang, suara bising, dan bau menyengat","Hindari makanan pemicu seperti cokelat, keju tua, dan MSG berlebihan bila sensitif","Hindari begadang dan jadwal tidur tidak teratur"],
+    tips:["Kenali dan catat pola pemicu migrain pribadi","Istirahat total di ruangan gelap dan tenang saat serangan muncul"]},
 
-            // UI State Change
-            document.getElementById('emptyState').classList.add('hidden');
-            document.getElementById('resultsContainer').classList.add('hidden');
-            document.getElementById('loadingState').classList.remove('hidden');
+  {id:"osteoartritis", label:"Osteoartritis (Pengapuran Sendi)", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Kompres Jahe + Kunyit Hangat", dosis:"1 ruas jahe, 1/2 ruas kunyit, diparut", cara:"Parut jahe dan kunyit, campur sedikit air hangat, balurkan pada sendi yang kaku/nyeri selama 15-20 menit, 1-2× sehari.", avoidIf:[], note:"Bersifat meredakan gejala nyeri ringan, bukan memperbaiki kerusakan sendi yang sudah terjadi."},
+      {herb:"Rebusan Kunyit + Serai", dosis:"1/2 ruas kunyit, 1 batang serai", cara:"Rebus dengan 300 ml air selama 15 menit, saring, minum hangat 1× sehari.", avoidIf:["ginjal"], note:"Digunakan sebagai pendamping untuk membantu meredakan peradangan ringan pada sendi."}
+    ],
+    pantangan:["Hindari aktivitas dengan beban tinggi pada sendi yang sudah aus (naik-turun tangga berlebihan, jongkok-berdiri berulang)","Hindari kelebihan berat badan yang membebani sendi","Jangan menghentikan obat/terapi fisik yang sudah diresepkan dokter tanpa konsultasi"],
+    tips:["Latihan penguatan otot sekitar sendi (sesuai anjuran fisioterapis) membantu menstabilkan sendi","Kontrol rutin ke dokter ortopedi untuk memantau perkembangan kondisi sendi"]},
 
-            try {
-                // Call Gemini 3 Flash API to get structured JSON analysis
-                const aiResponse = await getHerbalRecommendationFromGemini({ keluhan, durasi, riwayat, umur, berat });
-                
-                // Display Results
-                displayRecommendationResults(aiResponse, { keluhan, durasi, riwayat, umur, berat });
+  {id:"osteoporosis", label:"Osteoporosis (Tulang Keropos)", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Susu / Sari Kedelai Hangat + Sedikit Madu", dosis:"200 ml susu/sari kedelai tinggi kalsium", cara:"Minum hangat 1× sehari sebagai pendamping asupan kalsium harian, tidak menggantikan sumber kalsium utama dari makanan.", avoidIf:["diabetes"], note:"Perhatikan kandungan gula tambahan bila memiliki riwayat diabetes."},
+      {herb:"Rebusan Daun Kelor", dosis:"segenggam daun kelor segar", cara:"Rebus dengan 300 ml air selama 10 menit, saring, minum hangat 1× sehari.", avoidIf:["hamil"], note:"Kaya kalsium dan zat gizi mikro, digunakan sebagai pendamping pola makan, bukan pengobatan utama osteoporosis."}
+    ],
+    pantangan:["Hindari mengangkat beban berat secara mendadak dan gerakan membungkuk memutar yang berisiko patah tulang","Hindari merokok dan konsumsi alkohol berlebihan yang mempercepat pengeroposan tulang","Kurangi konsumsi kafein dan minuman bersoda berlebihan"],
+    tips:["Berjemur pagi hari sebentar membantu pembentukan vitamin D alami","Latihan menahan beban ringan (seperti jalan kaki) secara rutin, dan lakukan pemeriksaan kepadatan tulang (bone density) secara berkala"]},
 
-                // Fetch Images in Background for recommended herbs using Imagen API
-                generateHerbImages(aiResponse.rekomendasiHerbal);
+  {id:"jantung_koroner", label:"Penyakit Jantung Koroner", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Air Rebusan Bawang Putih", dosis:"1-2 siung bawang putih, digeprek", cara:"Rebus dengan 200 ml air selama 10 menit, saring, minum hangat dalam jumlah kecil sebagai pendamping pola makan sehat jantung.", avoidIf:["pengencer_darah","maag"], note:"Dapat memperkuat efek obat pengencer darah — wajib dikonsultasikan ke dokter jantung sebelum rutin dikonsumsi."},
+      {herb:"Teh Daun Salam", dosis:"5-7 lembar daun salam", cara:"Rebus dengan 300 ml air hingga tersisa 150 ml, saring, minum hangat 1× sehari.", avoidIf:[], note:"Bersifat pendamping gaya hidup, bukan pengganti obat jantung yang diresepkan."}
+    ],
+    pantangan:["Jangan pernah menghentikan atau mengganti obat jantung resep dokter dengan herbal apa pun","Hindari aktivitas fisik berat mendadak tanpa anjuran dokter/rehabilitasi jantung","Hindari makanan tinggi lemak jenuh, garam berlebih, dan merokok"],
+    tips:["Kontrol rutin ke dokter jantung sesuai jadwal, termasuk cek tekanan darah dan kolesterol","Kelola stres dan jaga pola tidur, keduanya berpengaruh besar pada kesehatan jantung"]},
 
-            } catch (error) {
-                console.error("Gemini API Error, using fallback engine:", error);
-                // Fallback to local intelligent rules engine if offline or API key limit
-                const fallbackData = getFallbackHerbalData(keluhan, durasi, riwayat, umur, berat);
-                displayRecommendationResults(fallbackData, { keluhan, durasi, riwayat, umur, berat });
-            } finally {
-                document.getElementById('loadingState').classList.add('hidden');
-                document.getElementById('resultsContainer').classList.remove('hidden');
-                // Scroll smoothly to top of results on mobile
-                if (window.innerWidth < 1024) {
-                    document.getElementById('resultsContainer').scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        }
+  {id:"stroke_pemulihan", label:"Pemulihan Pasca Stroke", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Air Rebusan Jahe Hangat (porsi kecil)", dosis:"1/2 ruas jahe geprek", cara:"Rebus dengan 200 ml air, saring, minum hangat dalam porsi kecil sebagai pendamping sirkulasi, bukan terapi utama.", avoidIf:["pengencer_darah","maag"], note:"Wajib dikonsultasikan ke dokter karena pasien pasca-stroke umumnya mengonsumsi obat pengencer darah/antiplatelet."},
+      {herb:"Air Kelapa Muda", dosis:"1 gelas", cara:"Minum segar untuk membantu menjaga hidrasi dan elektrolit tubuh.", avoidIf:["ginjal"], note:"Perlu penyesuaian pada pasien dengan gangguan fungsi ginjal."}
+    ],
+    pantangan:["Jangan menggantikan program fisioterapi/rehabilitasi medis dengan herbal","Hindari makanan tinggi garam dan lemak jenuh yang memperberat faktor risiko stroke berulang","Hindari aktivitas fisik tanpa pengawasan tenaga medis/terapis"],
+    tips:["Dukungan keluarga dan konsistensi jadwal terapi sangat berpengaruh pada pemulihan","Pantau tekanan darah dan gula darah secara rutin sesuai anjuran dokter"]},
 
-        // Gemini 3 Flash Call for Structured Herbal Diagnosis
-        async function getHerbalRecommendationFromGemini(data) {
-            const systemPrompt = `Anda adalah seorang Herbalis Senior dan Pakar Naturopati Nusantara yang berpengalaman. 
-Berikan saran rekomendasi pengobatan herbal tradisional yang aman, berkhasiat, dan terukur dalam Bahasa Indonesia.
-Pertimbangkan umur (${data.umur} thn) dan berat badan (${data.berat} kg) pasien untuk menakar dosis yang pas.
-Output HARUS berformat JSON valid tanpa Markdown surrounding text (hanya raw JSON) sesuai skema berikut:
+  {id:"pikun", label:"Alzheimer / Pikun (Demensia)", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Teh Rosemary/Daun Kemangi Hangat", dosis:"segenggam daun kemangi atau rosemary segar", cara:"Seduh dengan air panas selama 5-7 menit, minum hangat 1× sehari sebagai pendamping menjaga kewaspadaan, bukan pengobatan demensia.", avoidIf:["hamil"], note:"Belum ada bukti kuat herbal ini menyembuhkan demensia — perannya hanya suportif ringan."},
+      {herb:"Kunyit Hangat", dosis:"1/2 sdt bubuk kunyit dalam segelas air hangat", cara:"Campurkan dengan sedikit madu, minum hangat 1× sehari.", avoidIf:["ginjal"], note:"Digunakan sebagai bagian dari pola makan sehat otak, bukan terapi utama."}
+    ],
+    pantangan:["Jangan menunda pemeriksaan dan penanganan medis dengan mengandalkan herbal semata","Hindari membiarkan penderita dalam kondisi kurang stimulasi sosial dan mental dalam waktu lama","Hindari perubahan lingkungan/rutinitas yang terlalu mendadak, dapat memperburuk kebingungan"],
+    tips:["Stimulasi mental (mengobrol, permainan sederhana, mengingat kenangan) membantu menjaga fungsi kognitif","Pendampingan keluarga dan pengawasan rutin ke dokter saraf/geriatri sangat penting"]},
 
-{
-  "ringkasanDiagnosa": "Penjelasan singkat mengenai kondisi fisik pasien berdasarkan keluhan",
-  "rekomendasiHerbal": [
-    {
-      "namaHerbal": "Nama Tanaman (Nama Latin)",
-      "deskripsiSingkat": "Deskripsi singkat kandungan aktif dan kenapa cocok",
-      "manfaatUtama": "Khasiat spesifik untuk keluhan",
-      "caraPengolahan": "Langkah detail merebus/menyeduh/menumbuk",
-      "dosisKonsumsi": "Takaran minum (misal: 1 gelas 200ml, 2x sehari sesudah makan)",
-      "imagePrompt": "Detailed botanical photo of [Plant Latin Name] fresh leaves and root on clean wooden table"
+  {id:"ppok", label:"PPOK (Penyakit Paru Obstruktif Kronis)", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Wedang Jahe + Kencur Hangat", dosis:"1/2 ruas jahe, 1/2 ruas kencur", cara:"Rebus keduanya dengan 250 ml air, saring, minum hangat 1× sehari untuk membantu kenyamanan saluran napas, bukan mengobati kerusakan paru.", avoidIf:["maag"], note:"Tidak menggantikan bronkodilator/obat inhaler yang diresepkan dokter paru."},
+      {herb:"Uap Hangat dengan Sedikit Minyak Kayu Putih", dosis:"3-5 tetes dalam air panas", cara:"Hirup uapnya perlahan selama beberapa menit untuk membantu kelegaan napas sementara.", avoidIf:[], note:"Hentikan bila menyebabkan sesak/iritasi bertambah."}
+    ],
+    pantangan:["Hentikan total paparan asap rokok, termasuk asap rokok orang lain","Hindari udara berpolusi/berdebu dan cuaca sangat dingin tanpa pelindung","Jangan menghentikan penggunaan inhaler/obat paru resep dokter"],
+    tips:["Latihan pernapasan (sesuai anjuran dokter/fisioterapis paru) membantu efisiensi napas","Vaksinasi flu dan pneumonia sesuai anjuran dokter dapat membantu mencegah perburukan"]},
+
+  {id:"ginjal_kronis", label:"Penyakit Ginjal Kronis", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Air Putih Hangat dalam Jumlah Terkontrol", dosis:"sesuai anjuran dokter (jangan berlebihan)", cara:"Ikuti batas cairan harian yang dianjurkan dokter/ahli gizi ginjal, jangan menambah herbal cair tanpa konsultasi.", avoidIf:[], note:"Pada penyakit ginjal kronis, banyak herbal justru harus dihindari karena dapat memberatkan kerja ginjal."}
+    ],
+    pantangan:["Sangat disarankan TIDAK sembarangan mengonsumsi jamu/herbal tanpa konsultasi dokter ginjal (nefrolog), karena banyak zat herbal justru dapat memperberat kerja ginjal","Hindari makanan tinggi kalium dan fosfor berlebihan (sesuai anjuran ahli gizi)","Hindari obat pereda nyeri bebas (NSAID) tanpa resep dokter","Batasi asupan garam dan protein sesuai anjuran ahli gizi ginjal"],
+    tips:["Kontrol rutin fungsi ginjal (ureum, kreatinin) sesuai jadwal dokter","Ikuti diet rendah garam-kalium-fosfor yang disusun khusus oleh ahli gizi untuk pasien ginjal"]},
+
+  {id:"diabetes_tipe2", label:"Diabetes Tipe 2 (Kontrol Jangka Panjang)", cat:"Degeneratif", degenerative:true,
+    remedies:[
+      {herb:"Air Rebusan Daun Salam", dosis:"7-10 lembar daun salam", cara:"Rebus dengan 400 ml air hingga tersisa 200 ml, saring, minum hangat 1× sehari sebagai pendamping pola makan, bukan pengganti obat gula darah.", avoidIf:[], note:"Tetap pantau gula darah rutin walau mengonsumsi herbal ini."},
+      {herb:"Rebusan Daun Kelor", dosis:"segenggam daun kelor segar", cara:"Rebus dengan 300 ml air selama 10 menit, saring, minum hangat 1× sehari.", avoidIf:["hamil"], note:"Bila sedang mengonsumsi obat penurun gula darah, pantau gula darah lebih sering karena efek keduanya bisa bertumpuk."}
+    ],
+    pantangan:["Jangan menghentikan atau mengganti obat/insulin resep dokter dengan herbal apa pun","Hindari makanan/minuman tinggi gula sederhana dan karbohidrat olahan berlebihan","Periksa kaki secara rutin untuk mendeteksi luka lebih awal (komplikasi umum diabetes jangka panjang)"],
+    tips:["Cek gula darah secara rutin sesuai anjuran dokter, termasuk HbA1c berkala","Aktivitas fisik teratur dan pola makan seimbang adalah kunci utama pengendalian diabetes jangka panjang"]},
+
+  {id:"eksim", label:"Eksim (Dermatitis)", cat:"Kulit",
+    remedies:[
+      {herb:"Kompres Air Rebusan Daun Sirih", dosis:"5-7 lembar daun sirih", cara:"Rebus daun sirih dengan 300 ml air, dinginkan, gunakan air rebusan untuk mengompres area kulit yang meradang selama 10-15 menit, 1-2× sehari.", avoidIf:[], note:"Hentikan segera bila kulit terasa makin perih, panas, atau muncul luka terbuka."},
+      {herb:"Oles Lidah Buaya (Aloe Vera) Murni", dosis:"secukupnya, gel segar", cara:"Ambil gel lidah buaya segar, oleskan tipis pada area kulit kering/gatal, biarkan meresap.", avoidIf:[], note:"Uji coba di area kulit kecil dulu untuk memastikan tidak alergi terhadap getah lidah buaya."}
+    ],
+    pantangan:["Hindari sabun/produk dengan pewangi dan bahan kimia keras di area kulit yang meradang","Hindari menggaruk area gatal walau terasa ingin, dapat memperparah luka dan infeksi","Kenali dan hindari pemicu pribadi (deterjen tertentu, debu, bahan tekstil kasar) bila diketahui"],
+    tips:["Gunakan pelembap kulit tanpa pewangi secara rutin, terutama setelah mandi","Bila eksim sering kambuh, meluas, atau mengganggu tidur, periksakan ke dokter kulit untuk penanganan yang lebih terarah"]},
+
+  {id:"psoriasis", label:"Psoriasis", cat:"Kulit",
+    remedies:[
+      {herb:"Oles Minyak Kelapa Murni (VCO)", dosis:"secukupnya", cara:"Oleskan tipis pada area kulit bersisik untuk membantu melembapkan, lakukan setelah mandi saat kulit masih sedikit lembap.", avoidIf:[], note:"Bersifat melembapkan saja, tidak mengatasi peradangan yang mendasari psoriasis."},
+      {herb:"Kompres Air Hangat Suam-suam", dosis:"air hangat, bukan panas", cara:"Kompres lembut area kulit bersisik selama beberapa menit untuk membantu kenyamanan, hindari air yang terlalu panas.", avoidIf:[], note:"Mandi air terlalu panas justru dapat memperparah kekeringan dan iritasi kulit psoriasis."}
+    ],
+    pantangan:["Hindari menggaruk atau mengelupas sisik kulit secara paksa","Hindari stres berlebihan dan kurang tidur, keduanya dikenal memicu kekambuhan psoriasis","Hindari alkohol dan rokok yang dapat memperberat gejala"],
+    tips:["Psoriasis adalah kondisi kulit kronis yang idealnya dipantau dokter kulit untuk penanganan jangka panjang; herbal di sini hanya membantu kenyamanan, bukan mengobati akar penyebabnya","Jaga kelembapan kulit setiap hari dan kenali pemicu pribadi (stres, cuaca dingin, luka kulit)"]},
+
+  {id:"panu", label:"Panu (Tinea Versicolor)", cat:"Kulit",
+    remedies:[
+      {herb:"Oles Lengkuas (Laos)", dosis:"1 ruas lengkuas, dipotong", cara:"Potong lengkuas, gosokkan bagian dalamnya langsung pada area panu 1-2× sehari secara rutin.", avoidIf:[], note:"Cara tradisional yang umum digunakan; hentikan bila kulit terasa perih berlebihan."},
+      {herb:"Oles Belimbing Wuluh", dosis:"2-3 buah belimbing wuluh, dihaluskan", cara:"Haluskan dan campur sedikit kapur sirih/garam, oleskan pada area panu, diamkan 15-20 menit lalu bilas.", avoidIf:[], note:"Hindari area kulit yang sedang luka atau iritasi."}
+    ],
+    pantangan:["Hindari berbagi handuk, pakaian, atau alat mandi dengan orang lain selama masih ada panu","Hindari kondisi kulit lembap berkepanjangan (keringat berlebih tanpa dikeringkan)","Jangan menggaruk area panu karena dapat menyebar ke area kulit lain"],
+    tips:["Jaga kulit tetap kering, terutama di lipatan tubuh yang mudah berkeringat","Bila panu meluas atau tidak membaik setelah beberapa minggu, periksakan ke dokter kulit untuk pertimbangan obat antijamur"]},
+
+  {id:"kurap", label:"Kurap / Kadas (Tinea)", cat:"Kulit",
+    remedies:[
+      {herb:"Oles Getah Batang Kunyit atau Bubuk Kunyit + Air", dosis:"secukupnya", cara:"Buat pasta kunyit dengan sedikit air, oleskan pada area kurap 1-2× sehari.", avoidIf:[], note:"Kunyit dapat meninggalkan warna kuning sementara pada kulit dan pakaian."},
+      {herb:"Oles Lidah Buaya", dosis:"gel segar secukupnya", cara:"Oleskan gel lidah buaya murni pada area kurap untuk membantu meredakan gatal dan kemerahan.", avoidIf:[], note:"Hentikan bila timbul reaksi alergi seperti kemerahan yang makin parah."}
+    ],
+    pantangan:["Hindari menggaruk area kurap, dapat menyebarkan infeksi ke bagian kulit lain","Hindari berbagi pakaian, handuk, atau sisir dengan orang lain","Jaga area kurap tetap kering, hindari kelembapan berlebih"],
+    tips:["Cuci pakaian dan handuk yang bersentuhan dengan area kurap secara terpisah dan dengan air panas bila memungkinkan","Bila kurap tidak membaik atau meluas dalam 2 minggu, sebaiknya periksakan ke dokter kulit untuk obat antijamur yang sesuai"]},
+
+  {id:"biang_keringat", label:"Biang Keringat", cat:"Kulit",
+    remedies:[
+      {herb:"Kompres Air Rebusan Daun Sirih Dingin", dosis:"5 lembar daun sirih", cara:"Rebus daun sirih, dinginkan air rebusannya, gunakan untuk mengompres/menyeka area kulit yang biang keringat.", avoidIf:[], note:"Pastikan air rebusan benar-benar dingin sebelum digunakan pada kulit bayi/anak."},
+      {herb:"Bedak Tabur Alami (Bengkoang/Beras)", dosis:"secukupnya", cara:"Taburkan tipis pada area kulit yang biang keringat setelah mandi dan kulit benar-benar kering.", avoidIf:[], note:"Hindari penggunaan berlebihan yang dapat menyumbat pori."}
+    ],
+    pantangan:["Hindari pakaian tebal atau ketat di cuaca panas dan lembap","Hindari langsung memakai pakaian sebelum keringat benar-benar kering","Kurangi aktivitas di ruangan panas dan pengap tanpa sirkulasi udara"],
+    tips:["Mandi lebih sering dengan air sejuk saat cuaca panas dapat membantu mencegah biang keringat","Gunakan pakaian berbahan menyerap keringat seperti katun"]},
+
+  {id:"gatal_biduran", label:"Gatal-gatal / Biduran (Urtikaria)", cat:"Kulit",
+    remedies:[
+      {herb:"Kompres Air Dingin", dosis:"kain bersih + air dingin", cara:"Kompres area kulit yang gatal/bentol dengan kain dingin selama 10-15 menit untuk meredakan gatal dan bengkak ringan.", avoidIf:[], note:"Segera cari pertolongan medis bila disertai sesak napas, bengkak wajah/bibir, atau pusing hebat — ini tanda reaksi alergi berat."},
+      {herb:"Teh Chamomile Hangat (diminum)", dosis:"1 sachet/1 sdt bunga chamomile", cara:"Seduh dengan air panas 5 menit, minum hangat untuk membantu menenangkan reaksi kulit ringan.", avoidIf:[], note:"Hentikan bila justru memperparah reaksi alergi."}
+    ],
+    pantangan:["Hindari mandi air panas dan sabun beraroma kuat saat gatal-gatal muncul","Hindari makanan yang diketahui memicu alergi pribadi (seafood, kacang, telur, dll bila relevan)","Jangan menggaruk area bentol karena dapat memperluas reaksi kulit"],
+    tips:["Catat kemungkinan pemicu (makanan, obat, cuaca, gigitan serangga) untuk menghindarinya di kemudian hari","Bila biduran sering kambuh, meluas cepat, atau disertai sesak napas, segera ke dokter/UGD karena bisa jadi reaksi alergi serius"]},
+
+  {id:"bisul", label:"Bisul", cat:"Kulit",
+    remedies:[
+      {herb:"Kompres Air Hangat", dosis:"kain bersih + air hangat", cara:"Kompres area bisul dengan air hangat selama 10-15 menit, 3-4× sehari, untuk membantu mempercepat matangnya bisul.", avoidIf:[], note:"Jangan memencet atau memecahkan bisul secara paksa, risiko infeksi menyebar."},
+      {herb:"Oles Bawang Merah yang Dihaluskan", dosis:"1 siung bawang merah", cara:"Haluskan bawang merah, balurkan tipis pada area sekitar bisul (bukan pada luka terbuka), biarkan 15-20 menit lalu bilas bersih.", avoidIf:[], note:"Hindari pada kulit yang sudah terluka/pecah."}
+    ],
+    pantangan:["Jangan memencet, menusuk, atau memecahkan bisul sendiri","Hindari menyentuh bisul dengan tangan yang tidak bersih","Hindari berbagi handuk/pakaian selama bisul belum sembuh untuk mencegah penyebaran"],
+    tips:["Jaga kebersihan kulit dan cuci tangan sebelum menyentuh area sekitar bisul","Bila bisul membesar cepat, sangat nyeri, disertai demam, atau muncul berulang, segera periksakan ke dokter karena mungkin perlu tindakan medis"]},
+
+  {id:"kulit_kering", label:"Kulit Kering & Gatal", cat:"Kulit",
+    remedies:[
+      {herb:"Oles Minyak Kelapa Murni (VCO)", dosis:"secukupnya", cara:"Oleskan tipis merata pada kulit kering setelah mandi saat kulit masih sedikit lembap.", avoidIf:[], note:"Bagi kulit berjerawat, gunakan secukupnya karena teksturnya cukup berminyak."},
+      {herb:"Masker Lidah Buaya + Madu", dosis:"2 sdm gel lidah buaya, 1 sdt madu", cara:"Campurkan, oleskan pada area kulit kering, diamkan 15 menit, bilas dengan air bersih.", avoidIf:[], note:"Uji coba di area kulit kecil dulu untuk memastikan tidak ada reaksi alergi."}
+    ],
+    pantangan:["Hindari mandi air terlalu panas dan terlalu lama, dapat menghilangkan kelembapan alami kulit","Hindari sabun mandi dengan bahan pengering/alkohol tinggi","Kurangi paparan langsung AC/kipas angin dalam waktu lama tanpa pelembap ruangan"],
+    tips:["Gunakan pelembap segera setelah mandi selagi kulit masih lembap untuk mengunci kelembapan","Perbanyak asupan air putih dan makanan yang mengandung lemak sehat"]},
+
+  {id:"lainnya", label:"Keluhan Lainnya (Tidak Ada di Daftar)", cat:"Umum",
+    remedies:[
+      {herb:"Wedang Rempah Umum (Jahe + Kunyit + Serai)", dosis:"masing-masing 1 ruas/batang", cara:"Rebus jahe, kunyit, dan serai geprek dengan 400 ml air selama 15 menit, saring, minum hangat 1-2× sehari sebagai pendamping menjaga daya tahan tubuh.", avoidIf:["maag","ginjal"], note:"Ini adalah racikan umum penjaga daya tahan tubuh, bukan pengobatan spesifik untuk keluhan tertentu."}
+    ],
+    pantangan:["Karena keluhan spesifik tidak teridentifikasi, sangat disarankan memeriksakan diri ke dokter atau tenaga kesehatan terdekat","Hindari mengandalkan herbal umum untuk gejala yang belum jelas penyebabnya"],
+    tips:["Catat gejala secara rinci (kapan muncul, seberapa berat, apa yang memperberat/meringankan) untuk memudahkan pemeriksaan dokter"]},
+];
+
+const HISTORIES = [
+  {id:"none", label:"Tidak ada riwayat khusus"},
+  {id:"diabetes", label:"Diabetes"},
+  {id:"hipertensi", label:"Darah Tinggi (Hipertensi)"},
+  {id:"maag", label:"Maag / Asam Lambung (GERD)"},
+  {id:"ginjal", label:"Gangguan Ginjal"},
+  {id:"jantung", label:"Gangguan Jantung"},
+  {id:"hamil", label:"Sedang Hamil"},
+  {id:"menyusui", label:"Sedang Menyusui"},
+  {id:"pengencer_darah", label:"Sedang minum obat pengencer darah"},
+  {id:"alergi", label:"Punya alergi terhadap herbal/obat tertentu"},
+];
+
+const DURATIONS = [
+  {id:"lt3", label:"Kurang dari 3 hari"},
+  {id:"3_7", label:"3–7 hari"},
+  {id:"1_2mgg", label:"1–2 minggu"},
+  {id:"gt2mgg", label:"Lebih dari 2 minggu / sering kambuh"},
+];
+
+/* =======================================================
+   STATE
+   ======================================================= */
+let state = {
+  step: 1,
+  symptomId: null,
+  duration: null,
+  histories: [],
+  age: "",
+  weight: "",
+  activeCategory: "Semua",
+};
+
+const CATEGORIES = ["Semua", ...Array.from(new Set(SYMPTOMS.filter(s=>s.id!=='lainnya').map(s=>s.cat)))];
+
+function getFilteredSymptoms(query){
+  const q = (query||'').toLowerCase().trim();
+  return SYMPTOMS.filter(s=>{
+    const matchesCat = state.activeCategory === 'Semua' || s.cat === state.activeCategory;
+    const matchesQuery = !q || s.label.toLowerCase().includes(q);
+    return matchesCat && matchesQuery;
+  });
+}
+
+const TOTAL_STEPS = 5;
+
+function render(){
+  renderTrail();
+  const area = document.getElementById('cardArea');
+  if(state.step === 1) area.innerHTML = stepSymptom();
+  else if(state.step === 2) area.innerHTML = stepDuration();
+  else if(state.step === 3) area.innerHTML = stepHistory();
+  else if(state.step === 4) area.innerHTML = stepAgeWeight();
+  else if(state.step === 5) area.innerHTML = stepResult();
+  attachHandlers();
+}
+
+function renderTrail(){
+  const trail = document.getElementById('trail');
+  let html = '';
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const cls = i < state.step ? 'done' : (i === state.step ? 'active' : '');
+    html += `<div class="node ${cls}">${i < state.step ? '✓' : i}</div>`;
+    if(i < TOTAL_STEPS){
+      html += `<div class="seg ${i < state.step ? 'done':''}"></div>`;
     }
-  ],
-  "pantangan": [
-    {
-      "hal": "Nama makanan/minuman/kebiasaan dilarang",
-      "alasan": "Alasan singkat mengapa memperparah kondisi"
+  }
+  trail.innerHTML = html;
+}
+
+/* ---------- STEP 1 : Keluhan ---------- */
+function stepSymptom(){
+  const chips = CATEGORIES.map(c => {
+    const count = c === 'Semua' ? SYMPTOMS.length : SYMPTOMS.filter(s=>s.cat===c).length;
+    return `<div class="chip ${state.activeCategory===c?'active':''}" data-cat="${c}">${c}<span class="n">${count}</span></div>`;
+  }).join('');
+  const filtered = getFilteredSymptoms('');
+  const items = renderSymptomItems(filtered);
+  return `
+    <p class="step-label">Langkah 1 dari 5</p>
+    <h2>Apa keluhan utamamu?</h2>
+    <p class="sub">Pilih kategori untuk mempersempit daftar, atau langsung cari keluhannya.</p>
+    <div class="cat-chips">${chips}</div>
+    <input type="text" class="search-box" id="symptomSearch" placeholder="Cari keluhan, misal: batuk, pusing, maag...">
+    <div class="symptom-list" id="symptomList">${items}</div>
+    <div class="nav-row">
+      <button class="btn-ghost invisible">Kembali</button>
+      <button class="btn-primary" id="nextBtn" ${state.symptomId?'':'disabled'}>Lanjut →</button>
+    </div>
+  `;
+}
+
+function renderSymptomItems(list){
+  if(!list.length) return `<div class="empty-note">Tidak ditemukan — coba kategori lain atau pilih "Keluhan Lainnya".</div>`;
+  return list.map(s => `
+    <div class="symptom-item ${state.symptomId===s.id?'selected':''}" data-symptom="${s.id}">
+      <span>${s.label}</span>
+      <span class="cat">${s.cat}</span>
+    </div>`).join('');
+}
+
+
+/* ---------- STEP 2 : Durasi ---------- */
+function stepDuration(){
+  const opts = DURATIONS.map(d => `
+    <div class="opt ${state.duration===d.id?'selected':''}" data-duration="${d.id}">
+      <span class="dot"></span><span>${d.label}</span>
+    </div>`).join('');
+  return `
+    <p class="step-label">Langkah 2 dari 5</p>
+    <h2>Sudah berapa lama keluhan ini berlangsung?</h2>
+    <p class="sub">Durasi membantu menentukan apakah herbal cukup, atau kamu perlu segera ke dokter.</p>
+    <div class="option-grid">${opts}</div>
+    <div class="nav-row">
+      <button class="btn-ghost" id="backBtn">← Kembali</button>
+      <button class="btn-primary" id="nextBtn" ${state.duration?'':'disabled'}>Lanjut →</button>
+    </div>
+  `;
+}
+
+/* ---------- STEP 3 : Riwayat ---------- */
+function stepHistory(){
+  const opts = HISTORIES.map(h => `
+    <div class="opt checkbox ${state.histories.includes(h.id)?'selected':''}" data-history="${h.id}">
+      <span class="dot"></span><span>${h.label}</span>
+    </div>`).join('');
+  return `
+    <p class="step-label">Langkah 3 dari 5</p>
+    <h2>Punya riwayat kesehatan tertentu?</h2>
+    <p class="sub">Boleh pilih lebih dari satu. Ini membantu kami menyaring herbal yang sebaiknya dihindari.</p>
+    <div class="option-grid">${opts}</div>
+    <div class="nav-row">
+      <button class="btn-ghost" id="backBtn">← Kembali</button>
+      <button class="btn-primary" id="nextBtn" ${state.histories.length?'':'disabled'}>Lanjut →</button>
+    </div>
+  `;
+}
+
+/* ---------- STEP 4 : Usia & Berat ---------- */
+function stepAgeWeight(){
+  return `
+    <p class="step-label">Langkah 4 dari 5</p>
+    <h2>Usia dan berat badan</h2>
+    <p class="sub">Digunakan untuk menyesuaikan catatan dosis dan kehati-hatian penggunaan herbal.</p>
+    <div class="field-row">
+      <div class="field">
+        <label class="field-label">Usia (tahun)</label>
+        <input type="number" id="ageInput" min="1" max="120" placeholder="Contoh: 32" value="${state.age}">
+      </div>
+      <div class="field">
+        <label class="field-label">Berat badan (kg)</label>
+        <input type="number" id="weightInput" min="5" max="250" placeholder="Contoh: 60" value="${state.weight}">
+      </div>
+    </div>
+    <p class="hint">Data ini hanya digunakan di perangkatmu untuk menyusun rekomendasi, tidak dikirim atau disimpan di server manapun.</p>
+    <div class="nav-row">
+      <button class="btn-ghost" id="backBtn">← Kembali</button>
+      <button class="btn-primary" id="nextBtn">Lihat Rekomendasi →</button>
+    </div>
+  `;
+}
+
+/* ---------- STEP 5 : Hasil ---------- */
+function stepResult(){
+  const symptom = SYMPTOMS.find(s => s.id === state.symptomId);
+  const age = parseInt(state.age) || null;
+  const weight = parseInt(state.weight) || null;
+  const hasHistory = id => state.histories.includes(id);
+  const noHistory = state.histories.includes('none') || state.histories.length===0;
+
+  // ---- alerts ----
+  let alerts = [];
+  if(symptom.degenerative){
+    alerts.push({type:'danger', title:'Kondisi degeneratif — perlu penanganan medis rutin', text:'Ini termasuk kondisi degeneratif/kronis yang umumnya membutuhkan pemantauan dan pengobatan dokter secara berkelanjutan. Herbal di bawah ini hanya bersifat pendamping gaya hidup, bukan pengobatan utama, dan tidak boleh menggantikan obat, terapi, atau kontrol rutin yang sudah dijalani.'});
+  }
+  const emergencySymptoms = ['demam','diare','sakit_sendi','asam_urat','darah_tinggi'];
+  if(state.duration === 'gt2mgg' && !symptom.degenerative){
+    alerts.push({type:'danger', title:'Sebaiknya periksa ke dokter', text:'Keluhan yang berlangsung lebih dari 2 minggu atau sering kambuh sebaiknya diperiksakan ke dokter untuk memastikan penyebabnya. Herbal di bawah ini hanya membantu meringankan gejala, bukan mengobati akar masalah.'});
+  }
+  if(symptom.id === 'demam' && state.duration !== 'lt3'){
+    alerts.push({type:'danger', title:'Demam berkepanjangan perlu perhatian medis', text:'Demam yang berlangsung lebih dari 3 hari, sangat tinggi, atau disertai gejala berat (sesak napas, kejang, ruam, penurunan kesadaran) harus segera diperiksakan ke fasilitas kesehatan.'});
+  }
+  if(symptom.id === 'diare' ){
+    alerts.push({type:'danger', title:'Waspadai tanda dehidrasi berat', text:'Bila diare disertai darah/lendir, demam tinggi, atau tanda dehidrasi (lemas berat, mata cekung, jarang buang air kecil), segera ke fasilitas kesehatan terdekat.'});
+  }
+  if((symptom.id === 'darah_tinggi' || symptom.id==='sakit_sendi') && (hasHistory('jantung')||hasHistory('ginjal'))){
+    alerts.push({type:'danger', title:'Perlu pengawasan dokter', text:'Dengan riwayat jantung/ginjal, keluhan ini sebaiknya dipantau langsung oleh dokter. Herbal hanya bersifat pendamping, bukan pengganti pengobatan medis yang sedang dijalani.'});
+  }
+  if(hasHistory('hamil') || hasHistory('menyusui')){
+    alerts.push({type:'info', title:'Kehati-hatian ekstra untuk ibu hamil/menyusui', text:'Beberapa herbal tidak dianjurkan selama kehamilan/menyusui. Konsultasikan ke bidan/dokter kandungan sebelum mengonsumsi herbal apa pun secara rutin.'});
+  }
+  if(age !== null && age < 12){
+    alerts.push({type:'info', title:'Perhatian untuk usia anak', text:'Dosis dan jenis herbal untuk anak-anak perlu disesuaikan dan sebaiknya dikonsultasikan dulu ke dokter/apoteker, terutama untuk anak di bawah 5 tahun.'});
+  }
+  if(age !== null && age >= 60){
+    alerts.push({type:'info', title:'Perhatian untuk usia lanjut', text:'Pada usia lanjut, interaksi antara herbal dan obat rutin (misalnya obat jantung, darah tinggi, atau pengencer darah) perlu diperhatikan. Sebaiknya diskusikan dengan dokter yang menangani.'});
+  }
+  if(hasHistory('pengencer_darah')){
+    alerts.push({type:'danger', title:'Interaksi dengan obat pengencer darah', text:'Beberapa bahan herbal (jahe, bawang putih, kunyit dosis tinggi) dapat memperkuat efek obat pengencer darah dan meningkatkan risiko perdarahan. Konsultasikan ke dokter sebelum mengonsumsi.'});
+  }
+  if(hasHistory('alergi')){
+    alerts.push({type:'info', title:'Riwayat alergi', text:'Coba dalam jumlah sangat kecil terlebih dahulu untuk memastikan tidak ada reaksi alergi, sebelum mengonsumsi dalam jumlah penuh.'});
+  }
+
+  // ---- filter remedies ----
+  const historyLabelMap = Object.fromEntries(HISTORIES.map(h=>[h.id,h.label]));
+  let usableRemedies = [];
+  let skippedRemedies = [];
+  symptom.remedies.forEach(r=>{
+    const conflicts = (r.avoidIf||[]).filter(a => hasHistory(a));
+    if(conflicts.length && !noHistory){
+      skippedRemedies.push({...r, conflicts});
+    } else {
+      usableRemedies.push(r);
     }
-  ],
-  "tipsGayaHidup": [
-    "Tips konkret 1",
-    "Tips konkret 2",
-    "Tips konkret 3"
-  ]
-}`;
+  });
+  if(usableRemedies.length === 0){
+    usableRemedies = symptom.remedies; // fallback: show all with strong warning
+  }
 
-            const userQuery = `Pasien Keluhan: ${data.keluhan}.
-Lama Sakit: ${data.durasi}.
-Riwayat Penyakit/Alergi: ${data.riwayat}.
-Umur: ${data.umur} tahun, Berat Badan: ${data.berat} kg.
-Tolong racikkan 2 hingga 3 obat herbal alami nusantara terbaik lengkap dengan dosis, cara rebus/seduh, dan pantangannya.`;
+  const weightNote = weight !== null && weight < 40
+    ? `<div class="rx-note">⚖️ Berat badan di bawah 40 kg — gunakan takaran di batas paling minimal dari anjuran, dan mulai dari porsi kecil dahulu.</div>`
+    : '';
 
-            const apiKey = "AQ.Ab8RN6LqAKzQcWQQtHSi_SI1T428lv337oYNIuWpsEsfM_nQoQ";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+  const remedyCards = usableRemedies.map(r => `
+    <div class="rx-card">
+      <span class="stamp">Rekomendasi</span>
+      <h3>${r.herb}</h3>
+      <div class="rx-row"><span class="k">Takaran</span><span class="v">${r.dosis}</span></div>
+      <div class="rx-row"><span class="k">Cara Konsumsi</span><span class="v">${r.cara}</span></div>
+      ${r.note ? `<div class="rx-note">📌 ${r.note}</div>` : ''}
+      ${weightNote}
+    </div>
+  `).join('');
 
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-                generationConfig: {
-                    responseMimeType: "application/json"
-                }
-            };
+  const skippedBlock = skippedRemedies.length ? `
+    <div class="alert info">
+      <span class="ic">🛈</span>
+      <div><b>Beberapa herbal disembunyikan karena riwayat kesehatanmu</b>
+      ${skippedRemedies.map(r=>`${r.herb} (perlu dihindari karena riwayat: ${r.conflicts.map(c=>historyLabelMap[c]).join(', ')})`).join('; ')}.</div>
+    </div>` : '';
 
-            const response = await fetchWithRetry(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+  const alertBlock = alerts.map(a=>`
+    <div class="alert ${a.type}">
+      <span class="ic">${a.type==='danger'?'⚠️':'🛈'}</span>
+      <div><b>${a.title}</b>${a.text}</div>
+    </div>`).join('');
 
-            const result = await response.json();
-            const textResponse = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-            
-            if (!textResponse) throw new Error("Format respon Gemini tidak valid");
-            return JSON.parse(textResponse);
+  const pantanganBlock = symptom.pantangan.map(p=>`
+    <div class="pill avoid"><span class="ic">🚫</span><span>${p}</span></div>`).join('');
+
+  const tipsBlock = symptom.tips.map(t=>`
+    <div class="pill tip"><span class="ic">✅</span><span>${t}</span></div>`).join('');
+
+  const durationLabel = DURATIONS.find(d=>d.id===state.duration)?.label || '-';
+
+  return `
+    <div class="result-head">
+      <span class="eyebrow">Hasil Konsultasi</span>
+      <h2>${symptom.label}</h2>
+      <span class="meta">Durasi: ${durationLabel}${age?` · Usia: ${age} th`:''}${weight?` · BB: ${weight} kg`:''}</span>
+    </div>
+
+    ${alertBlock}
+    ${skippedBlock}
+
+    <div class="section-title">Rekomendasi Herbal</div>
+    ${remedyCards}
+
+    <div class="section-title">Pantangan / Hal yang Dihindari</div>
+    <div class="pill-list">${pantanganBlock}</div>
+
+    <div class="section-title">Tips Tambahan</div>
+    <div class="pill-list">${tipsBlock}</div>
+
+    <div class="disclaimer">
+      <b>Catatan penting:</b> RempahCheck memberikan informasi edukasi umum berbasis kebiasaan herbal tradisional, bukan diagnosis atau resep medis. Jika keluhan memberat, tidak membaik dalam beberapa hari, atau muncul gejala berat (sesak napas, nyeri dada, perdarahan, penurunan kesadaran, demam sangat tinggi), segera periksakan diri ke dokter atau fasilitas kesehatan terdekat. Selalu beri tahu dokter/apotekermu bila sedang mengonsumsi herbal bersamaan dengan obat resep lain.
+    </div>
+
+    <div class="restart-row">
+      <button class="btn-ghost" id="restartBtn">↺ Mulai Konsultasi Baru</button>
+    </div>
+  `;
+}
+
+/* =======================================================
+   HANDLERS
+   ======================================================= */
+function attachHandlers(){
+  // step 1
+  const search = document.getElementById('symptomSearch');
+  if(search){
+    search.addEventListener('input', (e)=>{
+      const filtered = getFilteredSymptoms(e.target.value);
+      document.getElementById('symptomList').innerHTML = renderSymptomItems(filtered);
+      bindSymptomClicks();
+    });
+  }
+  bindSymptomClicks();
+
+  document.querySelectorAll('[data-cat]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      state.activeCategory = el.dataset.cat;
+      const currentQuery = document.getElementById('symptomSearch') ? document.getElementById('symptomSearch').value : '';
+      render();
+      const newSearch = document.getElementById('symptomSearch');
+      if(newSearch){
+        newSearch.value = currentQuery;
+        newSearch.focus();
+        if(currentQuery){
+          document.getElementById('symptomList').innerHTML = renderSymptomItems(getFilteredSymptoms(currentQuery));
+          bindSymptomClicks();
         }
+      }
+    });
+  });
 
-        // Generate Herb Visuals using Imagen 4.0 API
-        async function generateHerbImages(herbalList) {
-            const apiKey = "AQ.Ab8RN6LqAKzQcWQQtHSi_SI1T428lv337oYNIuWpsEsfM_nQoQ";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`;
+  document.querySelectorAll('[data-duration]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      state.duration = el.dataset.duration;
+      render();
+    });
+  });
 
-            herbalList.forEach(async (herb, index) => {
-                const imgElement = document.getElementById(`herbImage-${index}`);
-                if (!imgElement) return;
+  document.querySelectorAll('[data-history]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      const id = el.dataset.history;
+      if(id === 'none'){
+        state.histories = state.histories.includes('none') ? [] : ['none'];
+      } else {
+        state.histories = state.histories.filter(h=>h!=='none');
+        if(state.histories.includes(id)) state.histories = state.histories.filter(h=>h!==id);
+        else state.histories.push(id);
+      }
+      render();
+    });
+  });
 
-                const prompt = herb.imagePrompt || `Realistic high quality botanical close-up photograph of ${herb.namaHerbal}, medicinal plant, natural lighting`;
+  const ageInput = document.getElementById('ageInput');
+  const weightInput = document.getElementById('weightInput');
+  if(ageInput) ageInput.addEventListener('input', e=> state.age = e.target.value);
+  if(weightInput) weightInput.addEventListener('input', e=> state.weight = e.target.value);
 
-                try {
-                    const response = await fetchWithRetry(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            instances: [{ prompt: prompt }],
-                            parameters: { "sampleCount": 1 }
-                        })
-                    });
+  const nextBtn = document.getElementById('nextBtn');
+  if(nextBtn) nextBtn.addEventListener('click', ()=>{
+    if(state.step < TOTAL_STEPS){ state.step++; render(); window.scrollTo({top:0, behavior:'smooth'}); }
+  });
 
-                    const resData = await response.json();
-                    if (resData.predictions && resData.predictions[0]?.bytesBase64Encoded) {
-                        const imageUrl = `data:image/png;base64,${resData.predictions[0].bytesBase64Encoded}`;
-                        imgElement.src = imageUrl;
-                        imgElement.classList.remove('animate-pulse');
-                    }
-                } catch (err) {
-                    console.warn(`Could not generate image for ${herb.namaHerbal}, keeping high-res fallback.`, err);
-                }
-            });
-        }
+  const backBtn = document.getElementById('backBtn');
+  if(backBtn) backBtn.addEventListener('click', ()=>{
+    if(state.step > 1){ state.step--; render(); window.scrollTo({top:0, behavior:'smooth'}); }
+  });
 
-        // Render Recommendation Data to HTML DOM
-        function displayRecommendationResults(data, patient) {
-            document.getElementById('resDiagnosisTitle').innerText = `Rekomendasi Pemulihan: ${patient.keluhan.substring(0, 35)}...`;
-            document.getElementById('resDurasi').innerText = patient.durasi;
-            document.getElementById('resUmurBB').innerText = `${patient.umur} Thn / ${patient.berat} kg`;
-            document.getElementById('resRiwayat').innerText = patient.riwayat;
+  const restartBtn = document.getElementById('restartBtn');
+  if(restartBtn) restartBtn.addEventListener('click', ()=>{
+    state = {step:1, symptomId:null, duration:null, histories:[], age:"", weight:""};
+    render();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+}
 
-            document.getElementById('resOverviewText').innerText = data.ringkasanDiagnosa || "Berdasarkan gejala yang dirasakan, berikut adalah resep bahan alami tradisional yang bermanfaat untuk meredakan inflamasi dan mempercepat regenerasi sel.";
+function bindSymptomClicks(){
+  document.querySelectorAll('[data-symptom]').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      state.symptomId = el.dataset.symptom;
+      document.querySelectorAll('[data-symptom]').forEach(x=>x.classList.remove('selected'));
+      el.classList.add('selected');
+      const nb = document.getElementById('nextBtn');
+      if(nb) nb.disabled = false;
+    });
+  });
+}
 
-            // Render Herbs Cards
-            const herbsListContainer = document.getElementById('herbsList');
-            herbsListContainer.innerHTML = '';
-
-            data.rekomendasiHerbal.forEach((herb, i) => {
-                const defaultFallbackImg = getFallbackHerbImage(herb.namaHerbal);
-
-                const herbCard = document.createElement('div');
-                herbCard.className = "bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden flex flex-col md:flex-row transition-all hover:shadow-md";
-                herbCard.innerHTML = `
-                    <div class="md:w-5/12 relative bg-slate-100 min-h-[200px] flex items-center justify-center overflow-hidden">
-                        <img id="herbImage-${i}" src="${defaultFallbackImg}" alt="${herb.namaHerbal}" class="w-full h-full object-cover animate-pulse transition-opacity duration-500" loading="lazy">
-                        <span class="absolute top-3 left-3 bg-herbal-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-white/20">
-                            HERBAL #${i+1}
-                        </span>
-                    </div>
-                    <div class="p-5 md:w-7/12 flex flex-col justify-between space-y-3">
-                        <div>
-                            <div class="flex items-start justify-between gap-2">
-                                <h5 class="text-lg font-bold font-serif text-slate-900">${herb.namaHerbal}</h5>
-                            </div>
-                            <p class="text-xs text-slate-500 mt-0.5 leading-relaxed">${herb.deskripsiSingkat || ''}</p>
-                            
-                            <div class="mt-3 bg-herbal-50/70 border border-herbal-100 p-2.5 rounded-xl">
-                                <span class="text-[11px] font-bold text-herbal-800 uppercase block tracking-wider">Khasiat Utama:</span>
-                                <p class="text-xs text-herbal-900 font-medium">${herb.manfaatUtama}</p>
-                            </div>
-                        </div>
-
-                        <div class="space-y-2 pt-2 border-t border-slate-100 text-xs">
-                            <div>
-                                <strong class="text-slate-700 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-blender text-amber-600"></i> Cara Pengolahan:
-                                </strong>
-                                <p class="text-slate-600 mt-0.5 leading-relaxed">${herb.caraPengolahan}</p>
-                            </div>
-                            <div>
-                                <strong class="text-slate-700 flex items-center gap-1.5">
-                                    <i class="fa-solid fa-prescription-bottle text-herbal-600"></i> Dosis & Frekuensi:
-                                </strong>
-                                <p class="text-herbal-800 font-semibold bg-white px-2 py-1 rounded border border-slate-200 inline-block mt-1">${herb.dosisKonsumsi}</p>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                herbsListContainer.appendChild(herbCard);
-            });
-
-            // Render Pantangan
-            const pantanganContainer = document.getElementById('pantanganList');
-            pantanganContainer.innerHTML = '';
-            
-            if (data.pantangan && data.pantangan.length > 0) {
-                data.pantangan.forEach(item => {
-                    const hal = typeof item === 'string' ? item : item.hal;
-                    const alasan = typeof item === 'string' ? '' : item.alasan;
-
-                    const pBox = document.createElement('div');
-                    pBox.className = "p-3 bg-rose-50/60 border border-rose-100 rounded-xl flex items-start gap-2.5";
-                    pBox.innerHTML = `
-                        <i class="fa-solid fa-circle-xmark text-rose-500 text-sm mt-0.5 flex-shrink-0"></i>
-                        <div>
-                            <span class="text-xs font-bold text-rose-900 block">${hal}</span>
-                            ${alasan ? `<span class="text-[11px] text-rose-700 leading-tight block mt-0.5">${alasan}</span>` : ''}
-                        </div>
-                    `;
-                    pantanganContainer.appendChild(pBox);
-                });
-            } else {
-                pantanganContainer.innerHTML = `<p class="text-xs text-slate-500">Tidak ada pantangan khusus, namun jaga pola makan tetap seimbang.</p>`;
-            }
-
-            // Render Tips Gaya Hidup
-            const tipsContainer = document.getElementById('tipsList');
-            tipsContainer.innerHTML = '';
-
-            if (data.tipsGayaHidup && data.tipsGayaHidup.length > 0) {
-                data.tipsGayaHidup.forEach(tip => {
-                    const li = document.createElement('li');
-                    li.className = "flex items-start gap-2 bg-white/60 p-2.5 rounded-xl border border-herbal-100/80";
-                    li.innerHTML = `
-                        <i class="fa-solid fa-circle-check text-herbal-600 text-sm mt-0.5 flex-shrink-0"></i>
-                        <span class="text-xs sm:text-sm text-slate-700">${tip}</span>
-                    `;
-                    tipsContainer.appendChild(li);
-                });
-            }
-        }
-
-        // Helper for reliable fallback botanical imagery
-        function getFallbackHerbImage(herbName) {
-            const name = (herbName || '').toLowerCase();
-            if (name.includes('kunyit') || name.includes('curcuma')) {
-                return 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80';
-            } else if (name.includes('jahe') || name.includes('zingiber')) {
-                return 'https://images.unsplash.com/photo-1615485290176-7c05b828db15?auto=format&fit=crop&w=600&q=80';
-            } else if (name.includes('kencur') || name.includes('temulawak')) {
-                return 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80';
-            } else if (name.includes('serai') || name.includes('lemongrass')) {
-                return 'https://images.unsplash.com/photo-1599940824399-b87987ceb72a?auto=format&fit=crop&w=600&q=80';
-            } else if (name.includes('daun sirih') || name.includes('piper')) {
-                return 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80';
-            }
-            // General high-res botanical medicinal plants fallback
-            return 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=600&q=80';
-        }
-
-        // Smart Local Fallback Rules Generator (Offline Safety)
-        function getFallbackHerbalData(keluhan, durasi, riwayat, umur, berat) {
-            const k = keluhan.toLowerCase();
-
-            if (k.includes('lambung') || k.includes('maag') || k.includes('mual') || k.includes('perut')) {
-                return {
-                    ringkasanDiagnosa: "Indikasi gangguan iritasi dinding lambung atau peningkatan asam lambung.",
-                    rekomendasiHerbal: [
-                        {
-                            namaHerbal: "Kunyit & Temulawak (Curcuma longa)",
-                            deskripsiSingkat: "Mengandung Kurkuminoid yang melapisi mukosa lambung dan meredakan radang.",
-                            manfaatUtama: "Menebralkan asam lambung tinggi, mengurangi mual dan perut kembung.",
-                            caraPengolahan: "Parut 2 ruas kunyit tua dan 1 ruas temulawak. Rebus dengan 2 gelas air hingga tersisa 1 gelas. Saring dan tambahkan 1 sendok makan madu murni.",
-                            dosisKonsumsi: `1 Gelas (200ml) hangat, diminum 2x sehari (pagi sebelum makan dan malam sebelum tidur). Disesuaikan untuk BB ${berat}kg.`,
-                            imagePrompt: "Fresh turmeric root and curcuma slices on wood table"
-                        },
-                        {
-                            namaHerbal: "Air Seduhan Daun Sirih Hijau",
-                            deskripsiSingkat: "Antiseptik alami penyeimbang pH pencernaan.",
-                            manfaatUtama: "Mengurangi rasa perih di ulu hati.",
-                            caraPengolahan: "Cuci bersih 5 lembar daun sirih, rebus dengan 3 gelas air sampai mendidih selama 10 menit.",
-                            dosisKonsumsi: "1 gelas sekali sehari saat perut perih.",
-                            imagePrompt: "Fresh betel leaves background"
-                        }
-                    ],
-                    pantangan: [
-                        { hal: "Makanan Pedas & Makanan Bersantan Kental", alasan: "Memicu produksi asam lambung mendadak." },
-                        { hal: "Kopi, Teh Pekat & Minuman Berkarbonasi", alasan: "Merangsang iritasi mukosa lambung." },
-                        { hal: "Makan Terlalu Malam / Langsung Tidur Setelah Makan", alasan: "Memicu refluks asam (GERD)." }
-                    ],
-                    tipsGayaHidup: [
-                        "Makan dengan porsi kecil tapi sering (5-6 kali sehari).",
-                        "Kunyah makanan hingga halus (minimal 30 kali kunyahan).",
-                        "Kelola stres dengan relaksasi atau napas dalam."
-                    ]
-                };
-            }
-
-            // Default general wellness fallback
-            return {
-                ringkasanDiagnosa: "Perlunya peningkatan imunitas tubuh dan pembersihan racun alami untuk pemulihan gejala.",
-                rekomendasiHerbal: [
-                    {
-                        namaHerbal: "Jahe Merah & Serai (Zingiber officinale var. rubrum)",
-                        deskripsiSingkat: "Mengandung Gingerol dan Essential Oils penghangat tubuh alami.",
-                        manfaatUtama: "Meningkatkan sirkulasi darah, meredakan nyeri dan meningkatkan daya tahan tubuh.",
-                        caraPengolahan: "Geprek 2 ruas jahe merah dan 1 batang serai. Rebus dalam 500ml air selama 15 menit. Tambahkan gula merah secukupnya.",
-                        dosisKonsumsi: `Minum 1 gelas hangat 2 kali sehari sesudah makan. Dosis sesuai umur ${umur} tahun.`,
-                        imagePrompt: "Red ginger root and lemongrass brew"
-                    },
-                    {
-                        namaHerbal: "Air Seduhan Kayu Manis & Madu",
-                        deskripsiSingkat: "Kaya antioksidan dan agen anti-inflamasi alami.",
-                        manfaatUtama: "Mempercepat pemulihan kebugaran tubuh.",
-                        caraPengolahan: "Seduh 1 batang kayu manis dengan air panas mendidih 200ml, diamkan 10 menit lalu beri 1 sendok madu.",
-                        dosisKonsumsi: "1 cangkir hangat sebelum tidur malam.",
-                        imagePrompt: "Cinnamon sticks with honey jar"
-                    }
-                ],
-                pantangan: [
-                    { hal: "Gula Berlebihan & Makanan Olahan (Junk Food)", alasan: "Menurunkan efektivitas sel imun tubuh." },
-                    { hal: "Es / Minuman Dingin Berpengawet", alasan: "Memperlambat metabolisme pencernaan." },
-                    { hal: "Begadang di atas jam 11 malam", alasan: "Menghambat proses regenerasi sel tubuh." }
-                ],
-                tipsGayaHidup: [
-                    "Cukupi kebutuhan air putih minimal 2.5 Liter per hari.",
-                    "Istirahat tidur berkualitas 7-8 jam sehari.",
-                    "Berjemur matahari pagi selama 15 menit antara pukul 08.00 - 09.00."
-                ]
-            };
-        }
-
-        // Print functionality for physical prescription sheet
-        function printPrescription() {
-            window.print();
-        }
-    </script>
+render();
+</script>
 </body>
 </html>
